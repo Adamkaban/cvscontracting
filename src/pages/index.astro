@@ -87,7 +87,7 @@ const today = new Date().toLocaleDateString('en-US', { month: 'long', year: 'num
   <!-- SERVICE BENTO -->
   <section class="container py-16">
     <Eyebrow text="What we cover" />
-    <h2 class="mt-2 text-3xl font-semibold tracking-tight text-ink">Browse by service</h2>
+    <h2 class="mt-2 text-3xl font-semibold tracking-tight text-ink">Contractor Services in Maine &amp; New Hampshire</h2>
     <div class="mt-8 grid auto-rows-[1fr] gap-4 md:grid-cols-3">
       {featured && (
         <a href={`/${featured.slug}`} class="group flex flex-col justify-between rounded-2xl border border-line bg-white p-6 md:col-span-2 md:row-span-2 hover:border-blue-700">
@@ -107,6 +107,7 @@ const today = new Date().toLocaleDateString('en-US', { month: 'long', year: 'num
           <h3 class="text-lg font-semibold text-ink">{s.name}</h3>
           <div class="mt-4 flex items-center gap-3 text-sm text-gray-500">
             <span><span class="num font-semibold text-gray-900">{counts[s.slug] ?? 0}</span> pros</span>
+            <span class="num">{usd(s.avg_cost_min)}&ndash;{usd(s.avg_cost_max)}</span>
             <span class="ml-auto font-medium text-blue-700 group-hover:underline">View &rarr;</span>
           </div>
         </a>
