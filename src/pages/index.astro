@@ -25,7 +25,8 @@ for (const s of services) {
   const mod = await import(`../data/companies/${s.slug}.json`).catch(() => ({ default: [] }))
   const list = mod.default as CompanyEntry[]
   counts[s.slug] = list.length
-  if (s.slug === 'basement-waterproofing') preview = list.slice(0, 3)
+  if (s.slug === 'basement-waterproofing')
+    preview = [...list].sort((a, b) => b.rating - a.rating || b.review_count - a.review_count).slice(0, 3)
   for (const company of list) {
     if (meCitySlugs.has(company.city_slug)) stateCounts.ME++
     else if (nhCitySlugs.has(company.city_slug)) stateCounts.NH++
@@ -106,7 +107,7 @@ const homeFaqs = [
           <p class="eyebrow mb-3 px-1">Top waterproofing pros</p>
           <div class="space-y-3">
             {preview.map((c, i) => (
-              <div class="flex items-center gap-3 rounded-lg border border-line bg-white p-3">
+              <a href={`/basement-waterproofing/${c.city_slug}`} class="flex items-center gap-3 rounded-lg border border-line bg-white p-3 hover:border-blue-700 hover:shadow-sm transition-shadow duration-150">
                 <span class="num w-5 shrink-0 text-sm font-semibold text-gray-400">#{i + 1}</span>
                 <Monogram name={c.name} logo={c.logo_url} />
                 <div class="min-w-0 flex-1">
@@ -116,7 +117,8 @@ const homeFaqs = [
                     <span class="num">{c.review_count}</span> reviews
                   </p>
                 </div>
-              </div>
+                <span class="shrink-0 text-xs font-medium text-blue-700">&rarr;</span>
+              </a>
             ))}
           </div>
         </div>
@@ -125,7 +127,7 @@ const homeFaqs = [
   </section>
 
   <!-- SERVICE BENTO -->
-  <section class="container py-16">
+  <section id="services" class="container py-16">
     <Eyebrow text="What we cover" />
     <h2 class="mt-2 text-3xl font-semibold tracking-tight text-ink">Contractor Services in Maine &amp; New Hampshire</h2>
     <div class="mt-8 grid auto-rows-[1fr] gap-4 md:grid-cols-3">
@@ -251,13 +253,13 @@ const homeFaqs = [
   </section>
 
   <!-- CTA BAND -->
-  <section class="bg-ink">
+  <section class="border-y border-line bg-tint">
     <div class="container flex flex-col items-start gap-4 py-14 md:flex-row md:items-center md:justify-between">
       <div>
-        <h2 class="text-2xl font-semibold text-white">Find Vetted Foundation &amp; Waterproofing Contractors in Maine &amp; NH</h2>
-        <p class="mt-1 text-gray-400">Free quotes from vetted pros in Maine and New Hampshire.</p>
+        <h2 class="text-2xl font-semibold text-ink">Find Trusted Contractors in Maine &amp; New Hampshire</h2>
+        <p class="mt-1 text-gray-600">Compare ratings, read reviews, and get free quotes — no obligation.</p>
       </div>
-      <CTAButton href={featured ? `/${featured.slug}` : '/'} variant="onDark" class="px-6 py-3">
+      <CTAButton href="/#services" variant="solid" class="px-6 py-3">
         {config.affiliate.ctaText}
       </CTAButton>
     </div>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- CVS Contracting favicon: white C arc on brand blue square -->
+  <rect width="512" height="512" rx="72" fill="#1D4ED8"/>
+  <!-- C letterform: arc center (256,256) r=140, stroke=72, opening at right (±45deg) -->
+  <!-- Bottom tip: (256+140*cos45, 256+140*sin45) = (355,355) -->
+  <!-- Top tip:    (256+140*cos45, 256-140*sin45) = (355,157) -->
+  <!-- large-arc=1 sweep=0 = CCW in SVG = goes left through the C shape -->
+  <path
+    d="M 355 355 A 140 140 0 1 0 355 157"
+    fill="none"
+    stroke="#FFFFFF"
+    stroke-width="72"
+    stroke-linecap="round"
+  />
+</svg>

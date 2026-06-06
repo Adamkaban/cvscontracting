@@ -37,7 +37,7 @@ html, body { background-color: #FAFAF7; }
   color: #6b7280; /* gray-500 */
 }
 
-/* primary affiliate CTA: ink key with travelling accent arrow */
+/* primary affiliate CTA: brand-blue key with travelling accent arrow */
 .btn-cta {
   display: inline-flex;
   align-items: center;
@@ -46,21 +46,32 @@ html, body { background-color: #FAFAF7; }
   border-radius: 0.5rem;
   font-weight: 600;
   white-space: nowrap;
-  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
 }
 .btn-cta svg { transition: color 0.15s ease, transform 0.2s ease; }
 .btn-cta:hover svg { transform: translateX(3px); }
+.btn-cta:active { transform: translateY(1px); }
+.btn-cta:focus-visible { outline: 2px solid #1D4ED8; outline-offset: 2px; }
 
-/* ink variant: for light (paper/white/tint) backgrounds */
-.btn-cta-ink { background-color: #0F172A; color: #fff; }
-.btn-cta-ink svg { color: #60A5FA; } /* blue-400 reads on near-black */
-.btn-cta-ink:hover { background-color: #1D4ED8; }
-.btn-cta-ink:hover svg { color: #fff; }
+/* solid variant (default): brand blue, for light (paper/white/tint) backgrounds.
+   Shadow tinted to brand hue for a soft lift, never pure-black. */
+.btn-cta-solid {
+  background-color: #1D4ED8;
+  color: #fff;
+  box-shadow: 0 1px 1px rgb(15 23 42 / 0.04), 0 2px 6px -1px rgb(29 78 216 / 0.30);
+}
+.btn-cta-solid svg { color: #fff; }
+.btn-cta-solid:hover {
+  background-color: #1E40AF;
+  box-shadow: 0 2px 4px rgb(15 23 42 / 0.06), 0 6px 16px -3px rgb(29 78 216 / 0.40);
+}
+.btn-cta-solid:active { box-shadow: 0 1px 2px rgb(29 78 216 / 0.30); }
 
-/* blue variant: for dark (ink) backgrounds where ink would vanish */
-.btn-cta-blue { background-color: #1D4ED8; color: #fff; }
-.btn-cta-blue svg { color: #fff; }
-.btn-cta-blue:hover { background-color: #1E40AF; }
+/* onDark variant: white key for dark (ink) backgrounds where blue would vanish */
+.btn-cta-onDark { background-color: #fff; color: #0F172A; }
+.btn-cta-onDark svg { color: #1D4ED8; }
+.btn-cta-onDark:hover { background-color: #EFF6FF; } /* blue-50 */
+.btn-cta-onDark:hover svg { color: #1E40AF; }
 
 /* ─── CSS variables (for JS components and edge cases) ── */
 :root {

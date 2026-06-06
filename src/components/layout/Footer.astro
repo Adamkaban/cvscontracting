@@ -8,34 +8,58 @@ const services = (servicesData as ServiceEntry[]).filter((s) => s.priority <= ph
 const year = new Date().getFullYear()
 ---
 <footer class="mt-20 bg-ink text-gray-300">
-  <div class="container grid grid-cols-2 gap-8 py-12 md:grid-cols-4">
+  <div class="container grid grid-cols-2 gap-8 py-12 md:grid-cols-5">
+    <!-- Brand col -->
     <div class="col-span-2 md:col-span-1">
       <p class="text-lg font-bold text-white">{config.brand.name}</p>
       <p class="mt-2 text-sm text-gray-400">Find trusted local contractors across Maine and New Hampshire.</p>
     </div>
-    <div>
+
+    <!-- Services col -->
+    <nav aria-label="Footer services">
       <p class="text-sm font-semibold text-white">Services</p>
       <ul class="mt-3 space-y-2 text-sm">
         {services.map((s) => (
           <li><a href={`/${s.slug}`} class="hover:text-white">{s.name}</a></li>
         ))}
       </ul>
-    </div>
-    <div>
+    </nav>
+
+    <!-- Locations col -->
+    <nav aria-label="Footer locations">
+      <p class="text-sm font-semibold text-white">Locations</p>
+      <ul class="mt-3 space-y-2 text-sm">
+        <li><a href="/locations" class="hover:text-white">All Locations</a></li>
+        <li><a href="/maine" class="hover:text-white">Maine</a></li>
+        <li><a href="/new-hampshire" class="hover:text-white">New Hampshire</a></li>
+        <li class="pt-1 text-xs text-gray-500">Top cities</li>
+        <li><a href="/basement-waterproofing/portland-me" class="hover:text-white text-xs">Portland, ME</a></li>
+        <li><a href="/basement-waterproofing/bangor-me" class="hover:text-white text-xs">Bangor, ME</a></li>
+        <li><a href="/basement-waterproofing/manchester-nh" class="hover:text-white text-xs">Manchester, NH</a></li>
+        <li><a href="/basement-waterproofing/nashua-nh" class="hover:text-white text-xs">Nashua, NH</a></li>
+      </ul>
+    </nav>
+
+    <!-- Resources col -->
+    <nav aria-label="Footer resources">
+      <p class="text-sm font-semibold text-white">Resources</p>
+      <ul class="mt-3 space-y-2 text-sm">
+        <li><a href="/blog" class="hover:text-white">Cost Guides</a></li>
+      </ul>
+    </nav>
+
+    <!-- Company col -->
+    <nav aria-label="Footer company">
       <p class="text-sm font-semibold text-white">Company</p>
       <ul class="mt-3 space-y-2 text-sm">
-        <li><a href="/blog" class="hover:text-white">Blog</a></li>
+        <li><a href="/about" class="hover:text-white">About</a></li>
+        <li><a href="/contact" class="hover:text-white">Contact</a></li>
         <li><a href="/affiliate-disclosure" class="hover:text-white">Affiliate Disclosure</a></li>
+        <li><a href="/privacy" class="hover:text-white">Privacy Policy</a></li>
       </ul>
-    </div>
-    <div>
-      <p class="text-sm font-semibold text-white">Coverage</p>
-      <ul class="mt-3 space-y-2 text-sm text-gray-400">
-        <li>Maine</li>
-        <li>New Hampshire</li>
-      </ul>
-    </div>
+    </nav>
   </div>
+
   <div class="border-t border-white/10">
     <div class="container flex flex-col gap-2 py-6 text-xs text-gray-500 md:flex-row md:items-center md:justify-between">
       <p>&copy; {year} {config.brand.name}. This site may receive compensation when you click affiliate links.</p>

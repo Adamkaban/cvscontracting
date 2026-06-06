@@ -3,10 +3,10 @@ interface Props {
   href: string
   rel?: string
   target?: string
-  variant?: 'ink' | 'blue'
+  variant?: 'solid' | 'onDark'
   class?: string
 }
-const { href, rel, target, variant = 'ink', class: extra = '' } = Astro.props
+const { href, rel, target, variant = 'solid', class: extra = '' } = Astro.props
 ---
 <a href={href} rel={rel} target={target} class={`btn-cta btn-cta-${variant} ${extra}`}>
   <span><slot /></span>

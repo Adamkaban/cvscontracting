@@ -1,0 +1,101 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro'
+import Breadcrumb from '../components/common/Breadcrumb.astro'
+import FAQAccordion from '../components/common/FAQAccordion.astro'
+import Eyebrow from '../components/common/Eyebrow.astro'
+import citiesData from '../data/cities.json'
+import servicesData from '../data/services.json'
+import type { CityEntry, ServiceEntry } from '../types'
+
+const phase = parseInt(import.meta.env.PUBLIC_PHASE ?? '1')
+const services = (servicesData as ServiceEntry[]).filter((s) => s.priority <= phase)
+const cities = (citiesData as CityEntry[]).filter(
+  (c) => c.state === 'Maine' && c.phase <= phase,
+)
+
+const faqs = [
+  {
+    question: 'What contractor services are available in Maine?',
+    answer:
+      'CVS Contracting connects Maine homeowners with licensed contractors for foundation repair, basement waterproofing, excavation, and snow removal across 19 cities from Portland to Bangor.',
+  },
+  {
+    question: 'How much do contractor services cost in Maine?',
+    answer:
+      'Costs vary by service. Basement waterproofing in Maine typically runs $3,000–$10,000. Foundation repair averages $2,000–$15,000. Excavation ranges $1,500–$12,000. Snow removal contracts range $300–$3,000 per season.',
+  },
+  {
+    question: 'Do Maine contractors need to be licensed?',
+    answer:
+      'Maine requires contractors to be licensed through the Maine Department of Professional and Financial Regulation. Always verify a contractor\'s license before signing a contract.',
+  },
+  {
+    question: 'Which cities in Maine does CVS Contracting cover?',
+    answer:
+      'We cover 19 Maine cities including Portland, Bangor, Lewiston, Auburn, Augusta, South Portland, Westbrook, Biddeford, and more. Use the city links below to find contractors in your area.',
+  },
+]
+---
+<SiteLayout
+  title="Contractor Services in Maine"
+  description="Find licensed foundation repair, basement waterproofing, excavation, and snow removal contractors across Maine. Compare local companies and get free quotes."
+  canonicalUrl="/maine"
+>
+  <div class="container max-w-4xl py-16">
+    <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Maine' }]} />
+
+    <Eyebrow text="Maine" />
+    <h1 class="text-3xl md:text-4xl font-bold text-ink tracking-tight mt-2">
+      Contractors in Maine
+    </h1>
+    <p class="text-base text-gray-600 leading-relaxed mt-4 max-w-2xl">
+      Find trusted local contractors for home improvement and exterior services across Maine.
+      CVS Contracting connects homeowners with licensed, reviewed businesses in 19 cities
+      statewide — from Portland and Bangor to smaller communities across the state.
+    </p>
+
+    <section class="mt-12">
+      <h2 class="text-2xl font-semibold text-ink tracking-tight">Services We Cover in Maine</h2>
+      <p class="text-gray-600 mt-2">
+        Browse by service to find contractors, compare ratings, and get free quotes.
+      </p>
+      <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2 mt-6">
+        {services.map((s) => (
+          <li>
+            <a
+              href={`/${s.slug}`}
+              class="flex flex-col gap-1 rounded-xl border border-line bg-white p-5 hover:border-blue-700 hover:shadow-sm transition-shadow duration-150"
+            >
+              <span class="text-base font-semibold text-ink">{s.name}</span>
+              <span class="text-sm text-gray-500">{s.description}</span>
+              <span class="text-xs text-blue-700 mt-1 font-medium">
+                Avg cost: ${s.avg_cost_min.toLocaleString()}–${s.avg_cost_max.toLocaleString()}
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="text-2xl font-semibold text-ink tracking-tight">Maine Cities We Serve</h2>
+      <p class="text-gray-600 mt-2">
+        Select your city to browse contractors and compare quotes for any service.
+      </p>
+      <ul class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 mt-6">
+        {cities.map((c) => (
+          <li>
+            <a
+              href={`/basement-waterproofing/${c.slug}`}
+              class="block rounded-lg border border-line bg-white px-4 py-3 text-sm text-blue-700 hover:border-blue-700"
+            >
+              {c.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <FAQAccordion faqs={faqs} />
+  </div>
+</SiteLayout>

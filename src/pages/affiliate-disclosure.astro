@@ -1,40 +1,57 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro'
+import SiteLayout from '../layouts/SiteLayout.astro'
 import Breadcrumb from '../components/common/Breadcrumb.astro'
+import Eyebrow from '../components/common/Eyebrow.astro'
 import config from '../../site.config.ts'
 ---
-<BaseLayout title="Affiliate Disclosure" noindex={true}>
-  <main class="container section">
-    <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Affiliate Disclosure" }]} />
-    <h1>Affiliate Disclosure</h1>
+<SiteLayout
+  title="Affiliate Disclosure | CVS Contracting"
+  description="CVS Contracting participates in affiliate programs with Angi, HomeAdvisor, and Thumbtack. Learn how we earn and how it affects our listings."
+  canonicalUrl="/affiliate-disclosure"
+>
+  <div class="container max-w-3xl py-16">
+    <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Affiliate Disclosure' }]} />
 
-    <p>
-      {config.brand.name} participates in affiliate programs with home services
-      networks including Angi, HomeAdvisor, and Thumbtack. When you click a "{config.affiliate.ctaText}"
-      button or other affiliate link on this site and request a quote or hire a contractor,
-      we may receive a commission from that partner.
-    </p>
+    <Eyebrow text="Legal" />
+    <h1 class="text-3xl md:text-4xl font-bold text-ink tracking-tight mt-2">
+      Affiliate Disclosure
+    </h1>
 
-    <h2>How We Earn</h2>
-    <p>
-      We are compensated when a referral results in a completed action, such as a
-      submitted quote request or a booked lead, through one of our affiliate partners.
-      There is no additional cost to you. The contractor or network pays the referral fee,
-      not the homeowner.
-    </p>
+    <div class="mt-8 space-y-8 text-gray-600 leading-relaxed">
+      <p>
+        {config.brand.name} participates in affiliate programs with home services
+        networks including Angi, HomeAdvisor, and Thumbtack. When you click a "{config.affiliate.ctaText}"
+        button or other affiliate link on this site and request a quote or hire a contractor,
+        we may receive a commission from that partner.
+      </p>
 
-    <h2>How This Affects Listings</h2>
-    <p>
-      Affiliate compensation does not influence which companies appear in our listings
-      or the order in which they are shown. Company data is sourced from public business
-      listings, and rankings are based on factors such as rating and review count, not
-      on payment.
-    </p>
+      <section>
+        <h2 class="text-2xl font-semibold text-ink tracking-tight mb-3">How We Earn</h2>
+        <p>
+          We are compensated when a referral results in a completed action, such as a
+          submitted quote request or a booked lead, through one of our affiliate partners.
+          There is no additional cost to you. The contractor or network pays the referral fee,
+          not the homeowner.
+        </p>
+      </section>
 
-    <h2>Questions</h2>
-    <p>
-      If you have questions about this disclosure, contact us through our
-      <a href="/contact">contact page</a>.
-    </p>
-  </main>
-</BaseLayout>
+      <section>
+        <h2 class="text-2xl font-semibold text-ink tracking-tight mb-3">How This Affects Listings</h2>
+        <p>
+          Affiliate compensation does not influence which companies appear in our listings
+          or the order in which they are shown. Company data is sourced from public business
+          listings, and rankings are based on factors such as rating and review count, not
+          on payment.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-ink tracking-tight mb-3">Questions</h2>
+        <p>
+          If you have questions about this disclosure, contact us through our
+          <a href="/contact" class="text-blue-700 hover:underline">contact page</a>.
+        </p>
+      </section>
+    </div>
+  </div>
+</SiteLayout>

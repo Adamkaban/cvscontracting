@@ -1,0 +1,36 @@
+---
+---
+<div
+  id="cookie-banner"
+  class="fixed bottom-0 left-0 right-0 z-50 hidden border-t border-line bg-white shadow-md"
+  role="alertdialog"
+  aria-label="Cookie consent"
+>
+  <div class="container flex flex-col items-start gap-3 py-4 sm:flex-row sm:items-center sm:justify-between">
+    <p class="text-sm text-gray-600">
+      We use cookies to improve your experience.
+      <a href="/privacy" class="text-brand underline hover:text-brand-dark">Privacy Policy</a>.
+    </p>
+    <button
+      id="cookie-agree"
+      class="shrink-0 rounded-md bg-brand px-5 py-2 text-sm font-semibold text-white hover:bg-brand-dark transition-colors duration-150"
+    >
+      Agree
+    </button>
+  </div>
+</div>
+
+<script>
+  const STORAGE_KEY = 'cookie_consent'
+  const banner = document.getElementById('cookie-banner')
+  const btn = document.getElementById('cookie-agree')
+
+  if (banner && !localStorage.getItem(STORAGE_KEY)) {
+    banner.classList.remove('hidden')
+  }
+
+  btn?.addEventListener('click', () => {
+    localStorage.setItem(STORAGE_KEY, '1')
+    banner?.classList.add('hidden')
+  })
+</script>

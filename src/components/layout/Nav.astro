@@ -1,23 +1,91 @@
 ---
 import config from '../../../site.config.ts'
 import servicesData from '../../data/services.json'
-import type { ServiceEntry } from '../../types'
+import citiesData from '../../data/cities.json'
+import type { ServiceEntry, CityEntry } from '../../types'
 import CTAButton from '../common/CTAButton.astro'
 
 const phase = parseInt(import.meta.env.PUBLIC_PHASE ?? '1')
 const services = (servicesData as ServiceEntry[]).filter((s) => s.priority <= phase)
+
+const allCities = citiesData as CityEntry[]
+const maineCities = allCities.filter((c) => c.state === 'Maine' && c.phase <= phase).slice(0, 6)
+const nhCities = allCities.filter((c) => c.state === 'New Hampshire' && c.phase <= phase).slice(0, 6)
 ---
 <header class="sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur">
   <nav class="container flex h-16 items-center justify-between" aria-label="Main">
-    <a href="/" class="flex items-center gap-2 text-lg font-bold tracking-tight text-ink">
+
+    <a href="/" class="text-lg font-bold tracking-tight text-ink">
       {config.brand.name}
-      <span class="hidden rounded-full border border-line bg-white px-2 py-0.5 text-xs font-medium text-gray-600 sm:inline">Maine & NH</span>
     </a>
 
-    <ul class="hidden items-center gap-6 md:flex">
-      {services.map((s) => (
-        <li><a href={`/${s.slug}`} class="text-sm text-gray-700 hover:text-blue-700">{s.name}</a></li>
-      ))}
+    <!-- Desktop (hover dropdowns — no JS, links always in DOM for Googlebot) -->
+    <ul class="hidden items-center gap-5 md:flex">
+
+      <!-- Services dropdown -->
+      <li class="relative group">
+        <span class="flex cursor-default items-center gap-1 text-sm text-gray-700 group-hover:text-blue-700 select-none">
+          Services
+          <svg class="transition-transform duration-150 group-hover:rotate-180" width="12" height="12" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
+            <path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z" />
+          </svg>
+        </span>
+        <!-- Invisible bridge prevents gap-flicker when cursor moves from trigger to panel -->
+        <div class="absolute left-0 top-full hidden group-hover:block group-focus-within:block pt-1">
+          <div class="w-52 rounded-xl border border-line bg-white py-2 shadow-lg">
+            {services.map((s) => (
+              <a
+                href={`/${s.slug}`}
+                class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-700"
+              >
+                {s.name}
+              </a>
+            ))}
+          </div>
+        </div>
+      </li>
+
+      <!-- Locations dropdown -->
+      <li class="relative group">
+        <span class="flex cursor-default items-center gap-1 text-sm text-gray-700 group-hover:text-blue-700 select-none">
+          Locations
+          <svg class="transition-transform duration-150 group-hover:rotate-180" width="12" height="12" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
+            <path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z" />
+          </svg>
+        </span>
+        <div class="absolute left-0 top-full hidden group-hover:block group-focus-within:block pt-1">
+          <div class="w-72 rounded-xl border border-line bg-white p-4 shadow-lg">
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <a href="/maine" class="text-xs font-semibold uppercase tracking-wide text-gray-900 hover:text-blue-700">Maine</a>
+                <ul class="mt-2 space-y-1">
+                  {maineCities.map((c) => (
+                    <li>
+                      <a href={`/basement-waterproofing/${c.slug}`} class="text-sm text-gray-600 hover:text-blue-700">{c.name}</a>
+                    </li>
+                  ))}
+                  <li><a href="/maine" class="mt-1 inline-block text-xs text-blue-700 hover:underline">All Maine →</a></li>
+                </ul>
+              </div>
+              <div>
+                <a href="/new-hampshire" class="text-xs font-semibold uppercase tracking-wide text-gray-900 hover:text-blue-700">New Hampshire</a>
+                <ul class="mt-2 space-y-1">
+                  {nhCities.map((c) => (
+                    <li>
+                      <a href={`/basement-waterproofing/${c.slug}`} class="text-sm text-gray-600 hover:text-blue-700">{c.name}</a>
+                    </li>
+                  ))}
+                  <li><a href="/new-hampshire" class="mt-1 inline-block text-xs text-blue-700 hover:underline">All NH →</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li><a href="/blog" class="text-sm text-gray-700 hover:text-blue-700">Cost Guides</a></li>
+      <li><a href="/about" class="text-sm text-gray-700 hover:text-blue-700">About</a></li>
+
       <li>
         <CTAButton href={services[0] ? `/${services[0].slug}` : '/'} class="px-4 py-2 text-sm">
           {config.affiliate.ctaText}
@@ -25,18 +93,42 @@ const services = (servicesData as ServiceEntry[]).filter((s) => s.priority <= ph
       </li>
     </ul>
 
+    <!-- Mobile hamburger (flat <details>, no nested dropdowns) -->
     <details class="relative md:hidden">
       <summary class="-mr-2 cursor-pointer list-none p-2" aria-label="Open menu">
         <svg width="24" height="24" viewBox="0 0 256 256" fill="currentColor" class="text-ink" aria-hidden="true">
           <path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z" />
         </svg>
       </summary>
-      <ul class="absolute right-0 top-full mt-2 w-56 rounded-lg border border-line bg-white py-2 shadow-md">
+      <ul class="absolute right-0 top-full mt-2 w-64 rounded-xl border border-line bg-white py-2 shadow-md">
+        <li class="px-4 pb-1 pt-2">
+          <span class="text-xs font-semibold uppercase tracking-wide text-gray-400">Services</span>
+        </li>
         {services.map((s) => (
-          <li><a href={`/${s.slug}`} class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-700">{s.name}</a></li>
+          <li><a href={`/${s.slug}`} class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-700">{s.name}</a></li>
         ))}
+        <li class="mt-1 border-t border-line px-4 pb-1 pt-2">
+          <span class="text-xs font-semibold uppercase tracking-wide text-gray-400">Locations</span>
+        </li>
+        <li><a href="/maine" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-700">Maine</a></li>
+        <li><a href="/new-hampshire" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-700">New Hampshire</a></li>
+        <li class="mt-1 border-t border-line">
+          <a href="/blog" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-700">Cost Guides</a>
+        </li>
+        <li>
+          <a href="/about" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-700">About</a>
+        </li>
+        <li class="px-4 py-3">
+          <a
+            href={services[0] ? `/${services[0].slug}` : '/'}
+            class="block w-full rounded-md bg-blue-700 px-4 py-2 text-center text-sm font-semibold text-white hover:bg-blue-800"
+          >
+            {config.affiliate.ctaText}
+          </a>
+        </li>
       </ul>
     </details>
+
   </nav>
 </header>
 

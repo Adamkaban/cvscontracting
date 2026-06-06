@@ -1,0 +1,80 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro'
+import Breadcrumb from '../components/common/Breadcrumb.astro'
+import Eyebrow from '../components/common/Eyebrow.astro'
+---
+<SiteLayout
+  title="About CVS Contracting"
+  description="CVS Contracting helps Maine and New Hampshire homeowners find licensed, reviewed local contractors for foundation repair, waterproofing, excavation, and snow removal."
+  canonicalUrl="/about"
+>
+  <div class="container max-w-3xl py-16">
+    <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'About' }]} />
+
+    <Eyebrow text="About Us" />
+    <h1 class="text-3xl md:text-4xl font-bold text-ink tracking-tight mt-2">
+      About CVS Contracting
+    </h1>
+
+    <div class="mt-8 space-y-6 text-gray-600 leading-relaxed">
+      <p>
+        CVS Contracting is a contractor directory and referral service connecting homeowners
+        across Maine and New Hampshire with licensed, vetted local businesses for foundation
+        repair, basement waterproofing, excavation, and snow removal.
+      </p>
+
+      <p>
+        Every listing in our directory is sourced from verified public business data.
+        We display real ratings and review counts so you can make an informed decision
+        before reaching out to a contractor.
+      </p>
+    </div>
+
+    <section class="mt-12">
+      <h2 class="text-2xl font-semibold text-ink tracking-tight">How It Works</h2>
+      <ol class="mt-4 space-y-3 text-gray-600">
+        <li class="flex gap-3">
+          <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-700 text-xs font-bold text-white">1</span>
+          <span>Search for your service and city — browse contractor listings with ratings, reviews, and contact info.</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-700 text-xs font-bold text-white">2</span>
+          <span>Click "Get Free Quotes" to request estimates from multiple contractors through our affiliate partners.</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-700 text-xs font-bold text-white">3</span>
+          <span>Compare quotes, check references, and hire the contractor that fits your project and budget.</span>
+        </li>
+      </ol>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="text-2xl font-semibold text-ink tracking-tight">Our Editorial Team</h2>
+      <div class="mt-4 flex items-start gap-4 rounded-xl border border-line bg-gray-50 p-5">
+        <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-blue-700 text-lg font-bold text-white">
+          C
+        </div>
+        <div>
+          <p class="font-semibold text-ink">CVS Contracting Editorial Team</p>
+          <p class="text-sm text-gray-500 mt-0.5">Home improvement writers covering the Northeast US</p>
+          <p class="text-sm text-gray-600 mt-2">
+            Our editorial team researches contractor services, cost data, and home improvement
+            topics across Maine and New Hampshire. Cost figures are sourced from HomeAdvisor,
+            Angi, and Thumbtack regional data.
+          </p>
+          <a href="/about/editorial-team" class="text-sm text-blue-700 hover:underline mt-2 inline-block">
+            View author profile
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="text-2xl font-semibold text-ink tracking-tight">Contact & Questions</h2>
+      <p class="text-gray-600 mt-2">
+        Have a question or feedback? <a href="/contact" class="text-blue-700 hover:underline">Use our contact form</a>.
+        For affiliate and partnership inquiries, see our <a href="/affiliate-disclosure" class="text-blue-700 hover:underline">affiliate disclosure</a>.
+      </p>
+    </section>
+  </div>
+</SiteLayout>

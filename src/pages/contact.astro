@@ -1,0 +1,41 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro'
+import Breadcrumb from '../components/common/Breadcrumb.astro'
+import Eyebrow from '../components/common/Eyebrow.astro'
+---
+<SiteLayout
+  title="Contact CVS Contracting"
+  description="Questions about CVS Contracting, contractor listings, or affiliate partnerships? Send us a message using the contact form below."
+  canonicalUrl="/contact"
+>
+  <div class="container max-w-2xl py-16">
+    <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Contact' }]} />
+
+    <Eyebrow text="Contact" />
+    <h1 class="text-3xl md:text-4xl font-bold text-ink tracking-tight mt-2">
+      Contact Us
+    </h1>
+    <p class="text-base text-gray-600 leading-relaxed mt-4">
+      Have a question about a contractor listing, a correction to report, or a
+      partnership inquiry? Use the form below and we'll get back to you.
+    </p>
+
+    <div class="mt-10 rounded-xl border border-line bg-gray-50 p-1 overflow-hidden">
+      <iframe
+        src="https://tally.so/embed/44zgNA?transparentBackground=1&hideTitle=1"
+        width="100%"
+        height="500"
+        frameborder="0"
+        marginheight="0"
+        marginwidth="0"
+        title="Contact form"
+        loading="lazy"
+      ></iframe>
+    </div>
+
+    <p class="mt-6 text-sm text-gray-500">
+      For affiliate disclosure questions, see our
+      <a href="/affiliate-disclosure" class="text-blue-700 hover:underline">affiliate disclosure page</a>.
+    </p>
+  </div>
+</SiteLayout>

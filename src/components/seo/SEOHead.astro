@@ -32,6 +32,7 @@ const rawOgImage = ogImage ?? config.seo.ogImage
 const ogImageUrl = rawOgImage.startsWith('http') ? rawOgImage : siteUrl + rawOgImage
 
 const robots = noindex ? 'noindex, nofollow' : 'index, follow'
+const ogType = (cleanPath ?? '').startsWith('/blog/') ? 'article' : 'website'
 ---
 <title>{finalTitle}</title>
 <meta name="description" content={metaDescription} />
@@ -43,7 +44,7 @@ const robots = noindex ? 'noindex, nofollow' : 'index, follow'
 <meta property="og:description" content={metaDescription} />
 <meta property="og:image" content={ogImageUrl} />
 <meta property="og:url" content={canonical} />
-<meta property="og:type" content="website" />
+<meta property="og:type" content={ogType} />
 <meta property="og:site_name" content={config.brand.name} />
 
 {/* Twitter Card */}
@@ -51,6 +52,14 @@ const robots = noindex ? 'noindex, nofollow' : 'index, follow'
 <meta name="twitter:title" content={finalTitle} />
 <meta name="twitter:description" content={metaDescription} />
 <meta name="twitter:image" content={ogImageUrl} />
+
+{/* Favicon — all formats */}
+<link rel="icon" href="/favicon.ico" sizes="32x32" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<meta name="theme-color" content="#1D4ED8" />
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#1D4ED8" />
 
 {/* Preload Geist (woff2, Latin 400) */}
 <link rel="preload" href={geistFontUrl} as="font" type="font/woff2" crossorigin />

@@ -1,0 +1,72 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro'
+import Breadcrumb from '../components/common/Breadcrumb.astro'
+import config from '../../site.config.ts'
+---
+<SiteLayout
+  title="Privacy Policy"
+  description="Privacy policy for CVS Contracting — how we collect, use, and protect information on cvscontracting.com."
+  canonicalUrl="/privacy"
+>
+  <div class="container max-w-3xl py-16">
+    <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Privacy Policy' }]} />
+
+    <h1 class="text-3xl md:text-4xl font-bold text-ink tracking-tight mt-4">Privacy Policy</h1>
+    <p class="text-sm text-gray-500 mt-2">Last updated: June 2026</p>
+
+    <div class="mt-8 space-y-8 text-gray-600 leading-relaxed">
+      <section>
+        <h2 class="text-xl font-semibold text-ink">Information We Collect</h2>
+        <p class="mt-3">
+          {config.brand.name} collects information you provide when using our site, including
+          contact form submissions and quote requests. We also collect standard server log data
+          (IP address, browser type, pages visited) through our hosting provider.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-semibold text-ink">How We Use Information</h2>
+        <ul class="mt-3 list-disc list-inside space-y-2">
+          <li>To respond to contact form messages</li>
+          <li>To connect you with contractor quote services through our affiliate partners (Angi, HomeAdvisor, Thumbtack)</li>
+          <li>To improve site content and user experience</li>
+          <li>To analyze aggregate traffic patterns (no personally identifiable data)</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-semibold text-ink">Affiliate Partners</h2>
+        <p class="mt-3">
+          When you click a "Get Free Quotes" button, you may be redirected to or connected
+          with third-party services including Angi, HomeAdvisor, or Thumbtack. These
+          services have their own privacy policies. We are not responsible for their data
+          practices. See our <a href="/affiliate-disclosure" class="text-blue-700 hover:underline">affiliate disclosure</a> for more detail.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-semibold text-ink">Cookies</h2>
+        <p class="mt-3">
+          This site uses minimal cookies for core functionality. We do not use tracking
+          cookies or behavioral advertising cookies. Third-party embeds (such as contact
+          forms) may set their own cookies governed by their respective privacy policies.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-semibold text-ink">Data Retention & Security</h2>
+        <p class="mt-3">
+          Contact form submissions are retained only as long as needed to respond to your
+          inquiry. We use HTTPS on all pages. We do not sell personal data to third parties.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-semibold text-ink">Contact</h2>
+        <p class="mt-3">
+          Questions about this policy? <a href="/contact" class="text-blue-700 hover:underline">Contact us</a>.
+        </p>
+      </section>
+    </div>
+  </div>
+</SiteLayout>

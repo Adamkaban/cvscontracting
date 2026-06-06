@@ -1,0 +1,86 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro'
+import Breadcrumb from '../components/common/Breadcrumb.astro'
+import Eyebrow from '../components/common/Eyebrow.astro'
+import citiesData from '../data/cities.json'
+import servicesData from '../data/services.json'
+import type { CityEntry, ServiceEntry, CompanyEntry } from '../types'
+
+const phase = parseInt(import.meta.env.PUBLIC_PHASE ?? '1')
+const allCities = (citiesData as CityEntry[]).filter((c) => c.phase <= phase)
+const services = (servicesData as ServiceEntry[]).filter((s) => s.priority <= phase)
+
+const cityServiceMap: Record<string, { slug: string; name: string }[]> = {}
+for (const service of services) {
+  const companies: CompanyEntry[] = await import(`../data/companies/${service.slug}.json`)
+    .then((m) => m.default as CompanyEntry[])
+    .catch(() => [])
+  for (const city of allCities) {
+    const count = companies.filter(
+      (co) => co.city_slug === city.slug && co.rating >= 3.5,
+    ).length
+    if (count >= 3) {
+      if (!cityServiceMap[city.slug]) cityServiceMap[city.slug] = []
+      cityServiceMap[city.slug].push({ slug: service.slug, name: service.name })
+    }
+  }
+}
+
+const maineCities = allCities.filter((c) => c.state === 'Maine').sort((a, b) => a.name.localeCompare(b.name))
+const nhCities = allCities.filter((c) => c.state === 'New Hampshire').sort((a, b) => a.name.localeCompare(b.name))
+---
+<SiteLayout
+  title="Contractor Locations — Maine & New Hampshire"
+  description="Browse all cities we serve across Maine and New Hampshire. Find licensed foundation repair, basement waterproofing, excavation, and snow removal contractors near you."
+  canonicalUrl="/locations"
+>
+  <div class="container max-w-4xl py-16">
+    <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Locations' }]} />
+
+    <Eyebrow text="All Locations" />
+    <h1 class="text-3xl md:text-4xl font-bold text-ink tracking-tight mt-2">
+      Contractor Locations — Maine & New Hampshire
+    </h1>
+    <p class="text-base text-gray-600 leading-relaxed mt-4 max-w-2xl">
+      CVS Contracting covers {allCities.length} cities across Maine and New Hampshire.
+      Select a city and service to browse licensed contractors.
+    </p>
+
+    {[
+      { label: 'Maine', cities: maineCities },
+      { label: 'New Hampshire', cities: nhCities },
+    ].map(({ label, cities }) => (
+      <section class="mt-12">
+        <Eyebrow text={label} />
+        <h2 class="text-2xl font-semibold text-ink tracking-tight mt-1">
+          {label} <span class="text-base font-normal text-gray-500">({cities.length} cities)</span>
+        </h2>
+        <ul class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 mt-4">
+          {cities.map((c) => {
+            const svcLinks = cityServiceMap[c.slug] ?? []
+            return (
+              <li class="rounded-lg border border-line bg-white px-4 py-3">
+                <p class="font-medium text-ink text-sm">{c.name}</p>
+                <p class="text-xs text-gray-500 mb-2">{c.county}</p>
+                {svcLinks.length > 0 ? (
+                  <div class="flex flex-wrap gap-1">
+                    {svcLinks.map((svc) => (
+                      <a
+                        href={`/${svc.slug}/${c.slug}`}
+                        class="inline-block rounded bg-blue-50 px-2 py-0.5 text-xs text-blue-700 hover:bg-blue-100"
+                      >
+                        {svc.name}
+                      </a>
+                    ))}
+                  </div>
+                ) : (
+                  <p class="text-xs text-gray-400">No listings yet</p>
+                )}
+              </li>
+            )
+          })}
+        </ul>
+      </section>
+    ))}
+  </div>
+</SiteLayout>
