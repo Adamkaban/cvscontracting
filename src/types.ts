@@ -40,4 +40,9 @@ export interface CompanyEntry {
   logo_url: string | null
   claimed: boolean
   featured: boolean
+  years_in_business?: number
+  insured?: boolean
+  bbb_rating?: string
+  service_area?: string
+  blurb?: string
 }
