@@ -1,0 +1,13 @@
+---
+import { initials, monogramColor } from '../../lib/ui'
+interface Props { name: string; logo?: string | null }
+const { name, logo } = Astro.props
+const bg = monogramColor(name)
+---
+{logo ? (
+  <img src={logo} alt={`${name} logo`} width="48" height="48" loading="lazy" decoding="async"
+       class="h-12 w-12 rounded-lg border border-line object-contain bg-white p-1" />
+) : (
+  <span class="flex h-12 w-12 items-center justify-center rounded-lg text-sm font-bold text-white"
+        style={`background:${bg}`} aria-hidden="true">{initials(name)}</span>
+)}

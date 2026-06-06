@@ -1,0 +1,10 @@
+---
+interface Props { variant?: 'neutral' | 'success' }
+const { variant = 'neutral' } = Astro.props
+const cls = variant === 'success'
+  ? 'border-green-200 bg-green-50 text-green-800'
+  : 'border-line bg-white text-gray-700'
+---
+<span class={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs font-medium ${cls}`}>
+  <slot />
+</span>
