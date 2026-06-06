@@ -14,6 +14,9 @@ const services = (servicesData as ServiceEntry[]).filter((s) => s.priority <= ph
 const cities = (citiesData as CityEntry[]).filter((c) => c.phase <= phase)
 
 // company counts per service + a small preview list for the hero
+const meCitySlugs = new Set(cities.filter((c) => c.state_abbr === 'ME').map((c) => c.slug))
+const nhCitySlugs = new Set(cities.filter((c) => c.state_abbr === 'NH').map((c) => c.slug))
+const stateCounts: Record<string, number> = { ME: 0, NH: 0 }
 const counts: Record<string, number> = {}
 let preview: CompanyEntry[] = []
 for (const s of services) {
@@ -21,6 +24,10 @@ for (const s of services) {
   const list = mod.default as CompanyEntry[]
   counts[s.slug] = list.length
   if (s.slug === 'basement-waterproofing') preview = list.slice(0, 3)
+  for (const company of list) {
+    if (meCitySlugs.has(company.city_slug)) stateCounts.ME++
+    else if (nhCitySlugs.has(company.city_slug)) stateCounts.NH++
+  }
 }
 const totalCompanies = Object.values(counts).reduce((a, b) => a + b, 0)
 const featured = services.find((s) => s.slug === 'basement-waterproofing') ?? services[0]
@@ -28,6 +35,8 @@ const rest = services.filter((s) => s.slug !== featured?.slug)
 const usd = (n: number) => '$' + n.toLocaleString('en-US')
 const topCities = cities.slice(0, 12)
 const today = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+const maineCityCount = cities.filter((c) => c.state_abbr === 'ME').length
+const nhCityCount = cities.filter((c) => c.state_abbr === 'NH').length
 ---
 <SiteLayout
   title="Contractor Services in Maine & Northeast US"
@@ -112,6 +121,36 @@ const today = new Date().toLocaleDateString('en-US', { month: 'long', year: 'num
           </div>
         </a>
       ))}
+    </div>
+  </section>
+
+  <!-- STATES -->
+  <section class="border-y border-line bg-tint">
+    <div class="container py-16">
+      <Eyebrow text="Where we operate" />
+      <h2 class="mt-2 text-3xl font-semibold tracking-tight text-ink">Services by State</h2>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2">
+        <a href="/maine" class="group flex flex-col justify-between rounded-2xl border border-line bg-white p-6 hover:border-blue-700">
+          <div>
+            <h3 class="text-xl font-semibold text-ink">Maine Contractors</h3>
+            <p class="mt-2 text-sm text-gray-500">
+              <span class="num font-semibold text-gray-900">{maineCityCount}</span> cities &middot;
+              <span class="num font-semibold text-gray-900">{stateCounts.ME}</span> contractors
+            </p>
+          </div>
+          <span class="mt-6 block text-sm font-medium text-blue-700 group-hover:underline">View Maine &rarr;</span>
+        </a>
+        <a href="/new-hampshire" class="group flex flex-col justify-between rounded-2xl border border-line bg-white p-6 hover:border-blue-700">
+          <div>
+            <h3 class="text-xl font-semibold text-ink">New Hampshire Contractors</h3>
+            <p class="mt-2 text-sm text-gray-500">
+              <span class="num font-semibold text-gray-900">{nhCityCount}</span> cities &middot;
+              <span class="num font-semibold text-gray-900">{stateCounts.NH}</span> contractors
+            </p>
+          </div>
+          <span class="mt-6 block text-sm font-medium text-blue-700 group-hover:underline">View New Hampshire &rarr;</span>
+        </a>
+      </div>
     </div>
   </section>
 
