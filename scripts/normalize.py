@@ -105,7 +105,7 @@ def main():
             reviews = int(float(r.get("google_reviews_count") or 0))
         except ValueError:
             continue
-        if rating < 3.5:
+        if rating < 3.5 or reviews < 1:
             continue
         city_name = (r.get("city") or "").strip()
         state = (r.get("state") or "").strip()
