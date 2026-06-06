@@ -1,0 +1,50 @@
+---
+import config from '../../../site.config.ts'
+
+interface Props {
+  title: string
+  description: string
+  author: string
+  pubDate: Date
+  updatedDate: Date
+  url: string
+  image?: string
+}
+
+const { title, description, author, pubDate, updatedDate, url, image } = Astro.props
+
+const siteUrl = (import.meta.env.SITE_URL ?? config.seo.siteUrl).replace(/\/$/, '')
+const imageUrl = image
+  ? image.startsWith('http')
+    ? image
+    : siteUrl + image
+  : siteUrl + config.seo.ogImage
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  image: imageUrl,
+  datePublished: pubDate.toISOString(),
+  dateModified: updatedDate.toISOString(),
+  author: {
+    '@type': 'Person',
+    name: author,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: config.brand.name,
+    url: siteUrl,
+    logo: {
+      '@type': 'ImageObject',
+      url: siteUrl + config.brand.logo,
+    },
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': url,
+  },
+}
+---
+<script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />

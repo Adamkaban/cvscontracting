@@ -1,0 +1,152 @@
+---
+import { getCollection } from 'astro:content'
+import SiteLayout from '../../layouts/SiteLayout.astro'
+import config from '../../../site.config.ts'
+import citiesData from '../../data/cities.json'
+import servicesData from '../../data/services.json'
+import type { CityEntry, ServiceEntry, CompanyEntry } from '../../types'
+
+import Breadcrumb from '../../components/common/Breadcrumb.astro'
+import CompanyList from '../../components/city/CompanyList.astro'
+import CostSection from '../../components/city/CostSection.astro'
+import HowToChoose from '../../components/city/HowToChoose.astro'
+import NearbyCities from '../../components/city/NearbyCities.astro'
+import CTASidebar from '../../components/city/CTASidebar.astro'
+import FAQAccordion from '../../components/common/FAQAccordion.astro'
+
+import ServiceSchema from '../../components/schema/ServiceSchema.astro'
+import LocalBusinessSchema from '../../components/schema/LocalBusinessSchema.astro'
+import FAQSchema from '../../components/schema/FAQSchema.astro'
+
+import { generateCityIntro } from '../../lib/intros'
+import { getCityServiceFAQs, type FAQ } from '../../lib/faqs'
+
+export async function getStaticPaths() {
+  const cities = citiesData as CityEntry[]
+  const services = servicesData as ServiceEntry[]
+  const phase = parseInt(import.meta.env.PUBLIC_PHASE ?? '1')
+  const hubs = await getCollection('services')
+
+  type CityPageProps = {
+    service: ServiceEntry
+    city: CityEntry
+    companies: CompanyEntry[]
+    hubFaqs: FAQ[]
+    validCitySlugs: string[]
+    allCities: CityEntry[]
+  }
+
+  const paths: Array<{
+    params: { service: string; city: string }
+    props: CityPageProps
+  }> = []
+
+  for (const service of services.filter((s) => s.priority <= phase)) {
+    const companies: CompanyEntry[] = await import(
+      `../../data/companies/${service.slug}.json`
+    )
+      .then((m) => m.default as CompanyEntry[])
+      .catch(() => [] as CompanyEntry[])
+
+    const hub = hubs.find((h) => h.data.serviceSlug === service.slug)
+    const hubFaqs: FAQ[] = hub?.data.faqs ?? []
+
+    // First pass: which cities qualify (>=3 companies, rating >= 3.5, in phase).
+    const qualifying: Array<{ city: CityEntry; companies: CompanyEntry[] }> = []
+    for (const city of cities.filter((c) => c.phase <= phase)) {
+      const cityCompanies = companies.filter(
+        (co) => co.city_slug === city.slug && co.rating >= 3.5,
+      )
+      if (cityCompanies.length < 3) continue // data.md: skip pages with <3 companies
+      qualifying.push({ city, companies: cityCompanies })
+    }
+
+    const validCitySlugs = qualifying.map((q) => q.city.slug)
+
+    for (const { city, companies: cityCompanies } of qualifying) {
+      paths.push({
+        params: { service: service.slug, city: city.slug },
+        props: {
+          service,
+          city,
+          companies: cityCompanies,
+          hubFaqs,
+          validCitySlugs,
+          allCities: cities,
+        },
+      })
+    }
+  }
+
+  return paths
+}
+
+const { service, city, companies, hubFaqs, validCitySlugs, allCities } = Astro.props
+
+const intro = generateCityIntro(city, service)
+const faqs = getCityServiceFAQs(city.name, hubFaqs)
+
+const pageTitle = `${service.name} in ${city.name}, ${city.state_abbr}`
+const description = `Find ${service.name.toLowerCase()} contractors in ${city.name}, ${city.state_abbr}. Compare local companies, read reviews, get free quotes. Avg cost: $${service.avg_cost_min.toLocaleString()}–$${service.avg_cost_max.toLocaleString()}.`
+const canonicalPath = `/${service.slug}/${city.slug}`
+---
+<SiteLayout title={pageTitle} description={description} canonicalUrl={canonicalPath}>
+  <Fragment slot="schema">
+    <ServiceSchema serviceName={service.name} cityName={city.name} stateAbbr={city.state_abbr} />
+    <LocalBusinessSchema companies={companies} cityName={city.name} stateAbbr={city.state_abbr} />
+    <FAQSchema faqs={faqs} />
+  </Fragment>
+
+  <div class="container section">
+    <Breadcrumb
+      items={[
+        { label: 'Home', href: '/' },
+        { label: service.name, href: `/${service.slug}` },
+        { label: `${city.name}, ${city.state_abbr}` },
+      ]}
+    />
+
+    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">
+      {service.name} in {city.name}, {city.state_abbr}
+    </h1>
+    <p class="text-base text-gray-600 leading-relaxed mt-4 max-w-2xl">{intro}</p>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
+      <div class="lg:col-span-2">
+        <CompanyList
+          companies={companies}
+          cityName={city.name}
+          serviceName={service.name}
+          affiliateUrl={service.affiliate_url}
+          affiliateRel={config.affiliate.linkRel}
+        />
+        <CostSection
+          cityName={city.name}
+          stateName={city.state}
+          serviceName={service.name}
+          serviceSlug={service.slug}
+          costMin={service.avg_cost_min}
+          costMax={service.avg_cost_max}
+        />
+        <HowToChoose />
+        <FAQAccordion faqs={faqs} />
+        <NearbyCities
+          nearbySlugList={city.nearby_cities}
+          serviceSlug={service.slug}
+          allCities={allCities}
+          validCitySlugs={validCitySlugs}
+        />
+      </div>
+
+      <div class="lg:col-span-1">
+        <CTASidebar
+          cityName={city.name}
+          costMin={service.avg_cost_min}
+          costMax={service.avg_cost_max}
+          affiliateUrl={service.affiliate_url}
+          affiliateRel={config.affiliate.linkRel}
+        />
+      </div>
+    </div>
+  </div>
+</SiteLayout>

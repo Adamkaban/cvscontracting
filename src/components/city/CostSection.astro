@@ -1,0 +1,76 @@
+---
+interface Props {
+  cityName: string
+  stateName: string
+  serviceName: string
+  serviceSlug: string
+  costMin: number
+  costMax: number
+}
+
+const { cityName, stateName, serviceName, serviceSlug, costMin, costMax } = Astro.props
+
+// Service-specific price factors (4–5 each).
+const factorsBySlug: Record<string, string[]> = {
+  'basement-waterproofing': [
+    'Interior drainage vs exterior excavation method',
+    'Foundation size and linear footage of wall treated',
+    'Severity of water intrusion and existing damage',
+    'Whether a sump pump or French drain is added',
+    'Soil type and local water table depth',
+  ],
+  'foundation-repair': [
+    'Type of damage: cracks, settlement, or bowing walls',
+    'Repair method: piers, underpinning, or wall anchors',
+    'Foundation material and depth',
+    'Accessibility and excavation required',
+    'Extent of structural movement',
+  ],
+  'excavation-contractors': [
+    'Project scope: site prep, grading, or trenching',
+    'Soil and rock conditions on the lot',
+    'Volume of material moved and hauled away',
+    'Equipment access and site distance',
+    'Permits and utility marking requirements',
+  ],
+  'snow-removal': [
+    'Per-visit vs seasonal contract pricing',
+    'Driveway or lot size and surface type',
+    'Snowfall depth and frequency of service',
+    'Salting or sanding add-ons',
+    'Residential vs commercial property',
+  ],
+}
+
+const factors = factorsBySlug[serviceSlug] ?? [
+  'Project scope and size',
+  'Materials and method chosen',
+  'Site access and conditions',
+  'Permits and inspection requirements',
+]
+---
+<section class="mt-10">
+  <h2 class="text-2xl font-semibold text-gray-900 tracking-tight">
+    Cost of {serviceName} in {cityName}, {stateName}
+  </h2>
+  <p class="text-gray-600 leading-relaxed mt-2">
+    Most {stateName} homeowners pay between
+    <span class="font-semibold text-gray-900">${costMin.toLocaleString()}</span>
+    and
+    <span class="font-semibold text-gray-900">${costMax.toLocaleString()}</span>
+    for {serviceName.toLowerCase()}, depending on the factors below.
+  </p>
+
+  <ul class="mt-4 space-y-2 text-gray-600">
+    {factors.map((f) => (
+      <li class="flex gap-2">
+        <span class="text-blue-700 font-bold" aria-hidden="true">·</span>
+        <span>{f}</span>
+      </li>
+    ))}
+  </ul>
+
+  <p class="text-xs text-gray-500 mt-4">
+    Avg cost data sourced from HomeAdvisor and Angi regional averages.
+  </p>
+</section>

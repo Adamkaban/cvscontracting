@@ -1,0 +1,59 @@
+---
+import type { CityEntry } from '../../types'
+
+interface Props {
+  cities: CityEntry[] // only cities with a published page for this service
+  serviceSlug: string
+  serviceName: string
+  groupByState?: boolean
+}
+
+const { cities, serviceSlug, serviceName, groupByState = true } = Astro.props
+
+// Group by state, Maine first then New Hampshire, others after.
+const stateOrder = ['Maine', 'New Hampshire']
+const grouped = new Map<string, CityEntry[]>()
+for (const c of cities) {
+  if (!grouped.has(c.state)) grouped.set(c.state, [])
+  grouped.get(c.state)!.push(c)
+}
+const groups = [...grouped.entries()].sort((a, b) => {
+  const ai = stateOrder.indexOf(a[0])
+  const bi = stateOrder.indexOf(b[0])
+  return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi)
+})
+for (const [, list] of groups) list.sort((a, b) => a.name.localeCompare(b.name))
+---
+<section class="mt-10">
+  <h2 class="text-2xl font-semibold text-gray-900 tracking-tight">
+    {serviceName} by City
+  </h2>
+  {
+    groupByState ? (
+      groups.map(([state, list]) => (
+        <div class="mt-6">
+          <h3 class="text-lg font-semibold text-gray-900 mb-3">{state}</h3>
+          <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+            {list.map((c) => (
+              <li>
+                <a href={`/${serviceSlug}/${c.slug}`} class="text-blue-700 hover:underline text-sm">
+                  {c.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    ) : (
+      <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mt-4">
+        {cities.map((c) => (
+          <li>
+            <a href={`/${serviceSlug}/${c.slug}`} class="text-blue-700 hover:underline text-sm">
+              {c.name}, {c.state_abbr}
+            </a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</section>

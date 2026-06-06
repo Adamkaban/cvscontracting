@@ -1,0 +1,45 @@
+---
+import config from '../../../site.config.ts'
+import servicesData from '../../data/services.json'
+import type { ServiceEntry } from '../../types'
+
+const phase = parseInt(import.meta.env.PUBLIC_PHASE ?? '1')
+const services = (servicesData as ServiceEntry[]).filter((s) => s.priority <= phase)
+const year = new Date().getFullYear()
+---
+<footer class="border-t border-gray-200 bg-white mt-16">
+  <div class="container py-10">
+    <div class="flex flex-col md:flex-row md:justify-between gap-8">
+      <div>
+        <p class="text-lg font-bold text-gray-900 tracking-tight">{config.brand.name}</p>
+        <p class="text-sm text-gray-500 mt-2">© {year} {config.brand.name}</p>
+      </div>
+
+      <nav aria-label="Services">
+        <p class="text-sm font-semibold text-gray-900">Services</p>
+        <ul class="mt-2 space-y-1">
+          {services.map((s) => (
+            <li>
+              <a href={`/${s.slug}`} class="text-sm text-blue-700 hover:underline">{s.name}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <nav aria-label="Company">
+        <p class="text-sm font-semibold text-gray-900">Company</p>
+        <ul class="mt-2 space-y-1">
+          <li>
+            <a href={config.affiliate.disclosurePage} class="text-sm text-blue-700 hover:underline">
+              Affiliate Disclosure
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <p class="text-xs text-gray-500 mt-8 border-t border-gray-200 pt-6">
+      {config.affiliate.footerDisclosure}
+    </p>
+  </div>
+</footer>

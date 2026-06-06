@@ -1,0 +1,35 @@
+---
+import config from '../../../site.config.ts'
+
+interface Props {
+  serviceName: string
+  description: string
+  costMin: number
+  costMax: number
+  affiliateUrl: string
+  affiliateRel: string
+}
+
+const { serviceName, description, costMin, costMax, affiliateUrl, affiliateRel } = Astro.props
+---
+<section class="border-b border-gray-200 pb-8 mb-8">
+  <h1 class="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">
+    {serviceName} Contractors in Northeast US
+  </h1>
+  <p class="text-base text-gray-600 leading-relaxed mt-3 max-w-2xl">{description}</p>
+  <div class="flex flex-col sm:flex-row sm:items-center gap-4 mt-6">
+    <div>
+      <p class="text-sm text-gray-500">Typical cost range</p>
+      <p class="text-2xl font-bold text-gray-900">
+        ${costMin.toLocaleString()}–${costMax.toLocaleString()}
+      </p>
+    </div>
+    <a
+      href={affiliateUrl}
+      rel={affiliateRel}
+      class="inline-block bg-blue-700 hover:bg-blue-800 text-white font-semibold rounded-md px-6 py-3 text-center"
+    >
+      {config.affiliate.ctaText}
+    </a>
+  </div>
+</section>

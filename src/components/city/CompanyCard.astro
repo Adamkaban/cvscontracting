@@ -1,0 +1,73 @@
+---
+import config from '../../../site.config.ts'
+
+interface Props {
+  company: {
+    name: string
+    address: string
+    phone: string | null
+    rating: number
+    review_count: number
+    google_maps_url: string | null
+  }
+  affiliateUrl: string
+  affiliateRel: string
+}
+
+const { company, affiliateUrl, affiliateRel } = Astro.props
+
+// Star breakdown: full, optional half, empty (total 5).
+const full = Math.floor(company.rating)
+const frac = company.rating - full
+const hasHalf = frac >= 0.25 && frac < 0.75
+const extraFull = frac >= 0.75 ? 1 : 0
+const fullCount = full + extraFull
+const emptyCount = 5 - fullCount - (hasHalf ? 1 : 0)
+
+const STAR =
+  'M239.2,97.29a16,16,0,0,0-13.81-11L166,81.17,142.72,25.81h0a15.95,15.95,0,0,0-29.44,0L90.07,81.17,30.61,86.32a16,16,0,0,0-9.11,28.06L66.61,153.8,53.09,212.34a16,16,0,0,0,23.84,17.34l51-31,51.11,31a16,16,0,0,0,23.84-17.34l-13.51-58.6,45.1-39.36A16,16,0,0,0,239.2,97.29Z'
+const STAR_HALF =
+  'M239.2,97.29a16,16,0,0,0-13.81-11L166,81.17,142.72,25.81h0a15.95,15.95,0,0,0-29.44,0L90.07,81.17,30.61,86.32a16,16,0,0,0-9.11,28.06L66.61,153.8,53.09,212.34a16,16,0,0,0,23.84,17.34l51-31,51.11,31a16,16,0,0,0,23.84-17.34l-13.51-58.6,45.1-39.36A16,16,0,0,0,239.2,97.29ZM128,168a8,8,0,0,0-4.15,1.15L82.79,194,93.71,146.65a8,8,0,0,0-2.6-8L54.59,106.85l47.94-4.15a8,8,0,0,0,6.75-4.92L128,53.49Z'
+---
+<article class="border border-gray-200 rounded-lg p-4 transition-shadow duration-150 hover:border-gray-300 hover:shadow-sm hover:border-l-4 hover:border-l-blue-700">
+  <div class="flex items-center gap-2">
+    <div class="flex" aria-hidden="true">
+      {Array.from({ length: fullCount }).map(() => (
+        <svg class="fill-amber-400 text-amber-400" width="16" height="16" viewBox="0 0 256 256"><path d={STAR} /></svg>
+      ))}
+      {hasHalf && (
+        <svg class="fill-amber-400 text-amber-400" width="16" height="16" viewBox="0 0 256 256"><path d={STAR_HALF} /></svg>
+      )}
+      {Array.from({ length: emptyCount }).map(() => (
+        <svg class="fill-gray-200 text-gray-200" width="16" height="16" viewBox="0 0 256 256"><path d={STAR} /></svg>
+      ))}
+    </div>
+    <span class="font-mono text-amber-500 text-sm">{company.rating.toFixed(1)}</span>
+    <span class="text-sm text-gray-500">· {company.review_count} reviews</span>
+  </div>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-2">
+    {company.google_maps_url ? (
+      <a href={company.google_maps_url} class="hover:text-blue-700" rel="nofollow" target="_blank">{company.name}</a>
+    ) : (
+      company.name
+    )}
+  </h3>
+
+  <p class="text-sm text-gray-600 mt-1">{company.address}</p>
+
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mt-3">
+    {company.phone ? (
+      <a href={`tel:${company.phone}`} class="font-mono text-gray-700 text-sm">{company.phone}</a>
+    ) : (
+      <span class="text-sm text-gray-400">Phone via quote</span>
+    )}
+    <a
+      href={affiliateUrl}
+      rel={affiliateRel}
+      class="bg-blue-700 hover:bg-blue-800 text-white rounded-md px-4 py-2 text-sm font-semibold text-center w-full sm:w-auto"
+    >
+      {config.affiliate.ctaText}
+    </a>
+  </div>
+</article>

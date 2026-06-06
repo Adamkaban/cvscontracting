@@ -1,0 +1,134 @@
+---
+import { getCollection, render } from 'astro:content'
+import SiteLayout from '../../layouts/SiteLayout.astro'
+import config from '../../../site.config.ts'
+import citiesData from '../../data/cities.json'
+import servicesData from '../../data/services.json'
+import type { CityEntry, ServiceEntry, CompanyEntry } from '../../types'
+
+import Breadcrumb from '../../components/common/Breadcrumb.astro'
+import ServiceHero from '../../components/hub/ServiceHero.astro'
+import CostTable from '../../components/hub/CostTable.astro'
+import WhenToHire from '../../components/hub/WhenToHire.astro'
+import CityGrid from '../../components/hub/CityGrid.astro'
+import HowToChoose from '../../components/city/HowToChoose.astro'
+import FAQAccordion from '../../components/common/FAQAccordion.astro'
+import ServiceSchema from '../../components/schema/ServiceSchema.astro'
+import FAQSchema from '../../components/schema/FAQSchema.astro'
+
+import { getHubFAQs } from '../../lib/faqs'
+
+export async function getStaticPaths() {
+  const cities = citiesData as CityEntry[]
+  const services = servicesData as ServiceEntry[]
+  const phase = parseInt(import.meta.env.PUBLIC_PHASE ?? '1')
+  const hubs = await getCollection('services')
+
+  const out = []
+  for (const service of services.filter((s) => s.priority <= phase)) {
+    const companies: CompanyEntry[] = await import(
+      `../../data/companies/${service.slug}.json`
+    )
+      .then((m) => m.default as CompanyEntry[])
+      .catch(() => [] as CompanyEntry[])
+
+    // Cities that have a published page for this service (>=3 companies, in phase).
+    const validCities = cities
+      .filter((c) => c.phase <= phase)
+      .filter(
+        (c) =>
+          companies.filter((co) => co.city_slug === c.slug && co.rating >= 3.5).length >= 3,
+      )
+
+    out.push({
+      params: { service: service.slug },
+      props: {
+        service,
+        hubContent: hubs.find((h) => h.data.serviceSlug === service.slug),
+        validCities,
+      },
+    })
+  }
+  return out
+}
+
+const { service, hubContent, validCities } = Astro.props
+
+const mid = Math.round((service.avg_cost_min + service.avg_cost_max) / 2)
+const range = `$${service.avg_cost_min.toLocaleString()}–$${service.avg_cost_max.toLocaleString()}`
+const costRows = [
+  { state: 'Maine', avgCost: `$${mid.toLocaleString()}`, range },
+  { state: 'New Hampshire', avgCost: `$${mid.toLocaleString()}`, range },
+]
+
+const hubFaqs = hubContent ? getHubFAQs(hubContent.data.faqs) : []
+const { Content } = hubContent ? await render(hubContent) : { Content: null }
+
+const pageTitle = `${service.name} Contractors in Northeast US`
+const canonicalPath = `/${service.slug}`
+---
+<SiteLayout title={pageTitle} description={service.description} canonicalUrl={canonicalPath}>
+  <Fragment slot="schema">
+    <ServiceSchema serviceName={service.name} />
+    <FAQSchema faqs={hubFaqs} />
+  </Fragment>
+
+  <div class="container section max-w-4xl">
+    <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: service.name }]} />
+
+    <ServiceHero
+      serviceName={service.name}
+      description={service.description}
+      costMin={service.avg_cost_min}
+      costMax={service.avg_cost_max}
+      affiliateUrl={service.affiliate_url}
+      affiliateRel={config.affiliate.linkRel}
+    />
+
+    {Content && (
+      <div class="prose-content text-gray-700 leading-relaxed space-y-4">
+        <Content />
+      </div>
+    )}
+
+    {hubContent && (
+      <section class="mt-10">
+        <h2 class="text-2xl font-semibold text-gray-900 tracking-tight">
+          How {service.name} Works
+        </h2>
+        <ol class="mt-4 space-y-2 text-gray-600 list-decimal list-inside">
+          {hubContent.data.howItWorks.steps.map((step) => <li>{step}</li>)}
+        </ol>
+        <p class="text-sm text-gray-500 mt-3">Typical timeline: {hubContent.data.howItWorks.timeline}</p>
+      </section>
+    )}
+
+    <section class="mt-10">
+      <h2 class="text-2xl font-semibold text-gray-900 tracking-tight">
+        Average Cost of {service.name}
+      </h2>
+      <p class="text-gray-600 mt-2 mb-4">
+        Regional averages for {service.name.toLowerCase()} across Maine and New Hampshire.
+      </p>
+      <CostTable rows={costRows} />
+      <p class="text-xs text-gray-500 mt-3">
+        Cost data sourced from HomeAdvisor and Angi regional averages. Average reflects the
+        midpoint of typical project ranges.
+      </p>
+    </section>
+
+    {hubContent && (
+      <WhenToHire
+        serviceName={service.name}
+        signs={hubContent.data.whenToHire.signs}
+        diyVsPro={hubContent.data.whenToHire.diyVsPro}
+      />
+    )}
+
+    <HowToChoose />
+
+    <CityGrid cities={validCities} serviceSlug={service.slug} serviceName={service.name} />
+
+    <FAQAccordion faqs={hubFaqs} />
+  </div>
+</SiteLayout>

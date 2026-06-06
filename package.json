@@ -8,6 +8,7 @@
     "check": "astro check"
   },
   "dependencies": {
+    "@astrojs/mdx": "^4.3.14",
     "@astrojs/sitemap": "^3.7.3",
     "@fontsource/geist": "^5.2.5",
     "@tailwindcss/vite": "^4.3.0",

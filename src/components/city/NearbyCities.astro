@@ -1,0 +1,36 @@
+---
+import type { CityEntry } from '../../types'
+
+interface Props {
+  nearbySlugList: string[] // city.nearby_cities (slugs)
+  serviceSlug: string
+  allCities: CityEntry[] // resolve slug → name
+  validCitySlugs: string[] // city slugs that have a published page for this service (>=3 companies, in phase)
+}
+
+const { nearbySlugList, serviceSlug, allCities, validCitySlugs } = Astro.props
+
+const valid = new Set(validCitySlugs)
+const bySlug = new Map(allCities.map((c) => [c.slug, c]))
+
+const links = nearbySlugList
+  .filter((slug) => valid.has(slug))
+  .map((slug) => bySlug.get(slug))
+  .filter((c): c is CityEntry => Boolean(c))
+---
+{
+  links.length > 0 && (
+    <section class="mt-10 pt-6 border-t border-gray-200">
+      <p class="text-sm font-semibold text-gray-900">Also serving nearby areas:</p>
+      <ul class="flex flex-wrap gap-x-4 gap-y-2 mt-2">
+        {links.map((c) => (
+          <li>
+            <a href={`/${serviceSlug}/${c.slug}`} class="text-blue-700 hover:underline text-sm">
+              {c.name}, {c.state_abbr}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}

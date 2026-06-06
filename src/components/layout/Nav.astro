@@ -1,0 +1,44 @@
+---
+import config from '../../../site.config.ts'
+import servicesData from '../../data/services.json'
+import type { ServiceEntry } from '../../types'
+
+const phase = parseInt(import.meta.env.PUBLIC_PHASE ?? '1')
+const services = (servicesData as ServiceEntry[]).filter((s) => s.priority <= phase)
+---
+<header class="border-b border-gray-200 bg-white">
+  <nav class="container flex items-center justify-between h-16" aria-label="Main">
+    <a href="/" class="text-lg font-bold text-gray-900 tracking-tight">{config.brand.name}</a>
+
+    {/* Desktop links */}
+    <ul class="hidden md:flex items-center gap-6">
+      {services.map((s) => (
+        <li>
+          <a href={`/${s.slug}`} class="text-sm text-gray-700 hover:text-blue-700">{s.name}</a>
+        </li>
+      ))}
+    </ul>
+
+    {/* Mobile menu — CSS only, no JS */}
+    <details class="md:hidden relative">
+      <summary class="list-none cursor-pointer p-2 -mr-2" aria-label="Open menu">
+        <svg width="24" height="24" viewBox="0 0 256 256" fill="currentColor" class="text-gray-900" aria-hidden="true">
+          <path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z" />
+        </svg>
+      </summary>
+      <ul class="absolute right-0 top-full mt-2 w-56 bg-white border border-gray-200 rounded-lg shadow-md py-2 z-10">
+        {services.map((s) => (
+          <li>
+            <a href={`/${s.slug}`} class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-700">{s.name}</a>
+          </li>
+        ))}
+      </ul>
+    </details>
+  </nav>
+</header>
+
+<style>
+  details > summary::-webkit-details-marker {
+    display: none;
+  }
+</style>

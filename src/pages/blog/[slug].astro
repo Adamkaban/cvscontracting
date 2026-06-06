@@ -1,0 +1,84 @@
+---
+import { getCollection, render } from 'astro:content'
+import SiteLayout from '../../layouts/SiteLayout.astro'
+import config from '../../../site.config.ts'
+import servicesData from '../../data/services.json'
+import type { ServiceEntry } from '../../types'
+
+import Breadcrumb from '../../components/common/Breadcrumb.astro'
+import BlogHeader from '../../components/blog/BlogHeader.astro'
+import AuthorBio from '../../components/blog/AuthorBio.astro'
+import CTABox from '../../components/blog/CTABox.astro'
+import FAQAccordion from '../../components/common/FAQAccordion.astro'
+import ArticleSchema from '../../components/schema/ArticleSchema.astro'
+import FAQSchema from '../../components/schema/FAQSchema.astro'
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog')
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }))
+}
+
+const { post } = Astro.props
+const { Content } = await render(post)
+
+const services = servicesData as ServiceEntry[]
+const service = services.find((s) => s.slug === post.data.service)
+const serviceName = service?.name ?? post.data.service
+
+const siteUrl = (import.meta.env.SITE_URL ?? config.seo.siteUrl).replace(/\/$/, '')
+const canonicalPath = `/blog/${post.id}`
+const articleUrl = siteUrl + canonicalPath
+
+const faqs = post.data.faqs ?? []
+---
+<SiteLayout
+  title={post.data.title}
+  description={post.data.description}
+  canonicalUrl={canonicalPath}
+  ogImage={post.data.ogImage}
+>
+  <Fragment slot="schema">
+    <ArticleSchema
+      title={post.data.title}
+      description={post.data.description}
+      author={post.data.author}
+      pubDate={post.data.pubDate}
+      updatedDate={post.data.updatedDate}
+      url={articleUrl}
+      image={post.data.ogImage}
+    />
+    <FAQSchema faqs={faqs} />
+  </Fragment>
+
+  <article class="container section max-w-2xl">
+    <Breadcrumb
+      items={[
+        { label: 'Home', href: '/' },
+        { label: 'Blog', href: '/blog' },
+        { label: post.data.title },
+      ]}
+    />
+
+    <BlogHeader
+      title={post.data.title}
+      description={post.data.description}
+      author={post.data.author}
+      pubDate={post.data.pubDate}
+      updatedDate={post.data.updatedDate}
+      category={post.data.category}
+    />
+
+    <div class="prose-content">
+      <Content />
+    </div>
+
+    <FAQAccordion faqs={faqs} />
+
+    <CTABox serviceSlug={post.data.service} serviceName={serviceName} />
+
+    <AuthorBio author={post.data.author} />
+  </article>
+</SiteLayout>

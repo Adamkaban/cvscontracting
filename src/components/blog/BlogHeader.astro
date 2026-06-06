@@ -1,0 +1,34 @@
+---
+interface Props {
+  title: string
+  description: string
+  author: string
+  pubDate: Date
+  updatedDate: Date
+  category: 'cost-guide' | 'how-to' | 'comparison'
+}
+
+// pubDate is part of Props for callers/schema parity; only updatedDate is shown.
+const { title, description, author, updatedDate, category } = Astro.props
+
+const categoryLabel: Record<Props['category'], string> = {
+  'cost-guide': 'Cost Guide',
+  'how-to': 'How-To',
+  comparison: 'Comparison',
+}
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+---
+<header class="mb-8">
+  <span class="inline-block text-xs font-semibold uppercase tracking-wide text-blue-700 bg-blue-50 rounded-full px-3 py-1">
+    {categoryLabel[category]}
+  </span>
+  <h1 class="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight mt-3">{title}</h1>
+  <p class="text-base text-gray-600 leading-relaxed mt-3">{description}</p>
+  <p class="text-sm text-gray-500 mt-4">
+    By <span class="font-medium text-gray-700">{author}</span>
+    <span aria-hidden="true"> · </span>
+    Last updated: {fmt(updatedDate)}
+  </p>
+</header>

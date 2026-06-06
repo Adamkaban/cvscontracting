@@ -1,0 +1,40 @@
+---
+import type { CompanyEntry } from '../../types'
+import CompanyCard from './CompanyCard.astro'
+
+interface Props {
+  companies: CompanyEntry[]
+  cityName: string
+  serviceName: string
+  affiliateUrl: string
+  affiliateRel: string
+}
+
+const { companies, cityName, serviceName, affiliateUrl, affiliateRel } = Astro.props
+---
+<section>
+  <h2 class="text-2xl font-semibold text-gray-900 tracking-tight">
+    Top {serviceName} Contractors in {cityName}
+  </h2>
+  <div class="flex flex-col gap-4 mt-4">
+    {companies.map((company) => (
+      <CompanyCard company={company} affiliateUrl={affiliateUrl} affiliateRel={affiliateRel} />
+    ))}
+  </div>
+
+  <div class="mt-6 bg-gray-50 border border-gray-200 rounded-xl p-6 text-center">
+    <p class="text-lg font-semibold text-gray-900">
+      Get Free Quotes from {cityName} Contractors
+    </p>
+    <p class="text-sm text-gray-600 mt-1">
+      Compare local pros and prices in minutes. Free, no obligation.
+    </p>
+    <a
+      href={affiliateUrl}
+      rel={affiliateRel}
+      class="inline-block mt-4 bg-blue-700 hover:bg-blue-800 text-white font-semibold rounded-md px-6 py-3"
+    >
+      Get Free Quotes
+    </a>
+  </div>
+</section>

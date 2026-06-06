@@ -1,0 +1,38 @@
+---
+// Shared across all city pages — identical guidance is a component, not duplicate content.
+const points = [
+  {
+    title: 'Verify license and insurance',
+    body: 'Confirm the contractor carries current liability insurance and any license your state requires before work begins.',
+  },
+  {
+    title: 'Check references and reviews',
+    body: 'Ask for recent local references and read independent reviews, not just testimonials on the company site.',
+  },
+  {
+    title: 'Get written estimates',
+    body: 'Collect at least three written, itemized estimates so you can compare scope and price on equal terms.',
+  },
+  {
+    title: 'Confirm warranties in writing',
+    body: 'Ask what the workmanship and material warranties cover, and whether the warranty is transferable.',
+  },
+  {
+    title: 'Avoid large upfront deposits',
+    body: 'Be cautious of any contractor demanding full payment before work starts. Tie payments to milestones.',
+  },
+]
+---
+<section class="mt-10">
+  <h2 class="text-2xl font-semibold text-gray-900 tracking-tight">
+    How to Choose a Contractor
+  </h2>
+  <ul class="mt-4 space-y-3">
+    {points.map((p) => (
+      <li>
+        <span class="font-semibold text-gray-900">{p.title}.</span>
+        <span class="text-gray-600"> {p.body}</span>
+      </li>
+    ))}
+  </ul>
+</section>

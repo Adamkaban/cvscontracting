@@ -1,0 +1,47 @@
+---
+interface Props {
+  faqs: Array<{ question: string; answer: string }>
+  headingLevel?: 'h2' | 'h3'
+}
+
+const { faqs, headingLevel = 'h2' } = Astro.props
+const Heading = headingLevel
+---
+{
+  faqs.length > 0 && (
+    <section class="mt-10">
+      <Heading class="text-2xl font-semibold text-gray-900 tracking-tight mb-2">
+        Frequently Asked Questions
+      </Heading>
+      <div class="divide-y divide-gray-200 border-t border-gray-200">
+        {faqs.map((faq) => (
+          <details class="group">
+            <summary class="flex items-center justify-between cursor-pointer py-4 font-semibold text-gray-900 list-none hover:text-blue-700 group-open:text-blue-700">
+              <span>{faq.question}</span>
+              <svg
+                class="shrink-0 ml-4 text-gray-400 transition-transform duration-150"
+                width="20"
+                height="20"
+                viewBox="0 0 256 256"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z" />
+              </svg>
+            </summary>
+            <p class="text-gray-600 pb-4 leading-relaxed">{faq.answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  details > summary::-webkit-details-marker {
+    display: none;
+  }
+  details[open] summary svg {
+    transform: rotate(180deg);
+  }
+</style>
