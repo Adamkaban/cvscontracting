@@ -1,5 +1,6 @@
 ---
 import config from '../../../site.config.ts'
+import Eyebrow from '../common/Eyebrow.astro'
 
 interface Props {
   serviceName: string
@@ -12,15 +13,16 @@ interface Props {
 
 const { serviceName, description, costMin, costMax, affiliateUrl, affiliateRel } = Astro.props
 ---
-<section class="border-b border-gray-200 pb-8 mb-8">
-  <h1 class="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">
+<section class="py-16 border-b border-line">
+  <Eyebrow text="Service hub" />
+  <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-ink mt-2">
     {serviceName} Contractors in Northeast US
   </h1>
-  <p class="text-base text-gray-600 leading-relaxed mt-3 max-w-2xl">{description}</p>
+  <p class="text-lg text-gray-600 leading-relaxed mt-3 max-w-2xl">{description}</p>
   <div class="flex flex-col sm:flex-row sm:items-center gap-4 mt-6">
     <div>
       <p class="text-sm text-gray-500">Typical cost range</p>
-      <p class="text-2xl font-bold text-gray-900">
+      <p class="text-2xl font-bold text-ink num">
         ${costMin.toLocaleString()}–${costMax.toLocaleString()}
       </p>
     </div>

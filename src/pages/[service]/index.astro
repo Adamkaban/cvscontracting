@@ -73,7 +73,7 @@ const canonicalPath = `/${service.slug}`
     <FAQSchema faqs={hubFaqs} />
   </Fragment>
 
-  <div class="container section max-w-4xl">
+  <div class="container max-w-4xl py-16">
     <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: service.name }]} />
 
     <ServiceHero
@@ -86,14 +86,14 @@ const canonicalPath = `/${service.slug}`
     />
 
     {Content && (
-      <div class="prose-content text-gray-700 leading-relaxed space-y-4">
+      <div class="prose-content mt-10">
         <Content />
       </div>
     )}
 
     {hubContent && (
       <section class="mt-10">
-        <h2 class="text-2xl font-semibold text-gray-900 tracking-tight">
+        <h2 class="text-2xl font-semibold text-ink tracking-tight">
           How {service.name} Works
         </h2>
         <ol class="mt-4 space-y-2 text-gray-600 list-decimal list-inside">
@@ -104,7 +104,7 @@ const canonicalPath = `/${service.slug}`
     )}
 
     <section class="mt-10">
-      <h2 class="text-2xl font-semibold text-gray-900 tracking-tight">
+      <h2 class="text-2xl font-semibold text-ink tracking-tight">
         Average Cost of {service.name}
       </h2>
       <p class="text-gray-600 mt-2 mb-4">

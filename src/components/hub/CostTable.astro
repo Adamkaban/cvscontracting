@@ -6,20 +6,20 @@ interface Props {
 const { rows } = Astro.props
 ---
 <div class="overflow-x-auto">
-  <table class="w-full text-left border border-gray-200 rounded-lg border-separate border-spacing-0">
+  <table class="w-full text-left border border-line">
     <thead>
-      <tr class="bg-gray-50 text-gray-900">
-        <th class="px-4 py-3 text-sm font-semibold border-b border-gray-200">State</th>
-        <th class="px-4 py-3 text-sm font-semibold border-b border-gray-200">Average Cost</th>
-        <th class="px-4 py-3 text-sm font-semibold border-b border-gray-200">Typical Range</th>
+      <tr class="bg-tint text-ink">
+        <th class="px-4 py-2 text-sm font-semibold border-b border-line">State</th>
+        <th class="px-4 py-2 text-sm font-semibold border-b border-line">Average Cost</th>
+        <th class="px-4 py-2 text-sm font-semibold border-b border-line">Typical Range</th>
       </tr>
     </thead>
     <tbody>
       {rows.map((row, i) => (
-        <tr class={i % 2 === 1 ? 'bg-gray-50' : 'bg-white'}>
-          <td class="px-4 py-3 text-sm font-medium text-gray-900 border-b border-gray-200">{row.state}</td>
-          <td class="px-4 py-3 text-sm text-gray-700 border-b border-gray-200 font-mono">{row.avgCost}</td>
-          <td class="px-4 py-3 text-sm text-gray-700 border-b border-gray-200 font-mono">{row.range}</td>
+        <tr class={i % 2 === 1 ? 'bg-tint' : 'bg-white'}>
+          <td class="px-4 py-2 text-sm font-medium text-ink border-b border-line">{row.state}</td>
+          <td class="px-4 py-2 text-sm text-gray-700 border-b border-line"><span class="num">{row.avgCost}</span></td>
+          <td class="px-4 py-2 text-sm text-gray-700 border-b border-line"><span class="num">{row.range}</span></td>
         </tr>
       ))}
     </tbody>

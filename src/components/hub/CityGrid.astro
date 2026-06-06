@@ -1,5 +1,6 @@
 ---
 import type { CityEntry } from '../../types'
+import Eyebrow from '../common/Eyebrow.astro'
 
 interface Props {
   cities: CityEntry[] // only cities with a published page for this service
@@ -25,18 +26,21 @@ const groups = [...grouped.entries()].sort((a, b) => {
 for (const [, list] of groups) list.sort((a, b) => a.name.localeCompare(b.name))
 ---
 <section class="mt-10">
-  <h2 class="text-2xl font-semibold text-gray-900 tracking-tight">
+  <h2 class="text-2xl font-semibold text-ink tracking-tight">
     {serviceName} by City
   </h2>
   {
     groupByState ? (
       groups.map(([state, list]) => (
         <div class="mt-6">
-          <h3 class="text-lg font-semibold text-gray-900 mb-3">{state}</h3>
-          <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+          <Eyebrow text={state} />
+          <ul class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 mt-3">
             {list.map((c) => (
               <li>
-                <a href={`/${serviceSlug}/${c.slug}`} class="text-blue-700 hover:underline text-sm">
+                <a
+                  href={`/${serviceSlug}/${c.slug}`}
+                  class="block rounded-lg border border-line bg-white px-4 py-3 text-sm text-blue-700 hover:border-blue-700"
+                >
                   {c.name}
                 </a>
               </li>
@@ -45,10 +49,13 @@ for (const [, list] of groups) list.sort((a, b) => a.name.localeCompare(b.name))
         </div>
       ))
     ) : (
-      <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mt-4">
+      <ul class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 mt-4">
         {cities.map((c) => (
           <li>
-            <a href={`/${serviceSlug}/${c.slug}`} class="text-blue-700 hover:underline text-sm">
+            <a
+              href={`/${serviceSlug}/${c.slug}`}
+              class="block rounded-lg border border-line bg-white px-4 py-3 text-sm text-blue-700 hover:border-blue-700"
+            >
               {c.name}, {c.state_abbr}
             </a>
           </li>
