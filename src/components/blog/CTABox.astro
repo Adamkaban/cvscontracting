@@ -1,4 +1,6 @@
 ---
+import CTAButton from '../common/CTAButton.astro'
+
 interface Props {
   serviceSlug: string
   serviceName: string
@@ -11,10 +13,7 @@ const { serviceSlug, serviceName } = Astro.props
   <p class="text-sm text-gray-600 mt-1">
     Browse vetted local companies, ratings, and cost ranges by city.
   </p>
-  <a
-    href={`/${serviceSlug}`}
-    class="inline-block mt-4 rounded-md bg-blue-700 px-6 py-3 font-semibold text-white hover:bg-blue-800"
-  >
+  <CTAButton href={`/${serviceSlug}`} class="mt-4 px-6 py-3">
     Get Free Quotes
-  </a>
+  </CTAButton>
 </div>

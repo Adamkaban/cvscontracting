@@ -1,6 +1,7 @@
 ---
 import config from '../../../site.config.ts'
 import Eyebrow from '../common/Eyebrow.astro'
+import CTAButton from '../common/CTAButton.astro'
 
 interface Props {
   serviceName: string
@@ -26,12 +27,8 @@ const { serviceName, description, costMin, costMax, affiliateUrl, affiliateRel }
         ${costMin.toLocaleString()}–${costMax.toLocaleString()}
       </p>
     </div>
-    <a
-      href={affiliateUrl}
-      rel={affiliateRel}
-      class="inline-block bg-blue-700 hover:bg-blue-800 text-white font-semibold rounded-md px-6 py-3 text-center"
-    >
+    <CTAButton href={affiliateUrl} rel={affiliateRel} class="px-6 py-3">
       {config.affiliate.ctaText}
-    </a>
+    </CTAButton>
   </div>
 </section>

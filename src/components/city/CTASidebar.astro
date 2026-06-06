@@ -1,5 +1,6 @@
 ---
 import config from '../../../site.config.ts'
+import CTAButton from '../common/CTAButton.astro'
 
 interface Props {
   cityName: string
@@ -17,12 +18,8 @@ const { cityName, costMin, costMax, affiliateUrl, affiliateRel } = Astro.props
   <p class="num text-2xl font-bold text-gray-900">
     ${costMin.toLocaleString()}–${costMax.toLocaleString()}
   </p>
-  <a
-    href={affiliateUrl}
-    rel={affiliateRel}
-    class="mt-4 block w-full rounded-md bg-blue-700 px-6 py-3 text-center font-semibold text-white hover:bg-blue-800"
-  >
+  <CTAButton href={affiliateUrl} rel={affiliateRel} class="mt-4 w-full px-6 py-3">
     {config.affiliate.ctaText}
-  </a>
+  </CTAButton>
   <p class="mt-2 text-center text-xs text-gray-500">Free quotes, no obligation</p>
 </aside>

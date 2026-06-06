@@ -2,6 +2,7 @@
 import config from '../../../site.config.ts'
 import Monogram from '../common/Monogram.astro'
 import Badge from '../common/Badge.astro'
+import CTAButton from '../common/CTAButton.astro'
 import type { CompanyEntry } from '../../types'
 
 interface Props {
@@ -63,10 +64,9 @@ const STAR_HALF = 'M239.2,97.29a16,16,0,0,0-13.81-11L166,81.17,142.72,25.81h0a15
         {company.phone
           ? <a href={`tel:${company.phone}`} class="num text-sm text-gray-700">{company.phone}</a>
           : <span class="text-sm text-gray-400">Phone via quote</span>}
-        <a href={affiliateUrl} rel={affiliateRel}
-           class="w-full rounded-md bg-blue-700 px-4 py-2 text-center text-sm font-semibold text-white hover:bg-blue-800 sm:w-auto">
+        <CTAButton href={affiliateUrl} rel={affiliateRel} class="w-full px-4 py-2 text-sm sm:w-auto">
           {config.affiliate.ctaText}
-        </a>
+        </CTAButton>
       </div>
     </div>
   </div>

@@ -2,6 +2,7 @@
 import config from '../../../site.config.ts'
 import servicesData from '../../data/services.json'
 import type { ServiceEntry } from '../../types'
+import CTAButton from '../common/CTAButton.astro'
 
 const phase = parseInt(import.meta.env.PUBLIC_PHASE ?? '1')
 const services = (servicesData as ServiceEntry[]).filter((s) => s.priority <= phase)
@@ -18,10 +19,9 @@ const services = (servicesData as ServiceEntry[]).filter((s) => s.priority <= ph
         <li><a href={`/${s.slug}`} class="text-sm text-gray-700 hover:text-blue-700">{s.name}</a></li>
       ))}
       <li>
-        <a href={services[0] ? `/${services[0].slug}` : '/'}
-           class="rounded-md bg-blue-700 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-800">
+        <CTAButton href={services[0] ? `/${services[0].slug}` : '/'} class="px-4 py-2 text-sm">
           {config.affiliate.ctaText}
-        </a>
+        </CTAButton>
       </li>
     </ul>
 

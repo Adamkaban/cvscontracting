@@ -3,6 +3,7 @@ import SiteLayout from '../layouts/SiteLayout.astro'
 import OrganizationSchema from '../components/schema/OrganizationSchema.astro'
 import Eyebrow from '../components/common/Eyebrow.astro'
 import Monogram from '../components/common/Monogram.astro'
+import CTAButton from '../components/common/CTAButton.astro'
 import config from '../../site.config.ts'
 import servicesData from '../data/services.json'
 import citiesData from '../data/cities.json'
@@ -152,10 +153,9 @@ const today = new Date().toLocaleDateString('en-US', { month: 'long', year: 'num
         <h2 class="text-2xl font-semibold text-white">Ready to compare local contractors?</h2>
         <p class="mt-1 text-gray-400">Free quotes from vetted pros in Maine and New Hampshire.</p>
       </div>
-      <a href={featured ? `/${featured.slug}` : '/'}
-         class="rounded-md bg-blue-700 px-6 py-3 font-semibold text-white hover:bg-blue-800">
+      <CTAButton href={featured ? `/${featured.slug}` : '/'} variant="blue" class="px-6 py-3">
         {config.affiliate.ctaText}
-      </a>
+      </CTAButton>
     </div>
   </section>
 </SiteLayout>

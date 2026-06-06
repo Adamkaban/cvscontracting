@@ -37,6 +37,31 @@ html, body { background-color: #FAFAF7; }
   color: #6b7280; /* gray-500 */
 }
 
+/* primary affiliate CTA: ink key with travelling accent arrow */
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+.btn-cta svg { transition: color 0.15s ease, transform 0.2s ease; }
+.btn-cta:hover svg { transform: translateX(3px); }
+
+/* ink variant: for light (paper/white/tint) backgrounds */
+.btn-cta-ink { background-color: #0F172A; color: #fff; }
+.btn-cta-ink svg { color: #60A5FA; } /* blue-400 reads on near-black */
+.btn-cta-ink:hover { background-color: #1D4ED8; }
+.btn-cta-ink:hover svg { color: #fff; }
+
+/* blue variant: for dark (ink) backgrounds where ink would vanish */
+.btn-cta-blue { background-color: #1D4ED8; color: #fff; }
+.btn-cta-blue svg { color: #fff; }
+.btn-cta-blue:hover { background-color: #1E40AF; }
+
 /* ─── CSS variables (for JS components and edge cases) ── */
 :root {
   --color-primary:    #1D4ED8;
