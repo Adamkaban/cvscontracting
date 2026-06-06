@@ -1,0 +1,742 @@
+[
+  {
+    "name": "Auburn",
+    "state": "Maine",
+    "state_abbr": "ME",
+    "slug": "auburn-me",
+    "county": "Androscoggin County",
+    "population": 24061,
+    "lat": 44.0979,
+    "lng": -70.2312,
+    "zip": "04210",
+    "phase": 1,
+    "nearby_cities": [
+      "lewiston-me",
+      "brunswick-me",
+      "windham-me",
+      "augusta-me",
+      "westbrook-me"
+    ]
+  },
+  {
+    "name": "Augusta",
+    "state": "Maine",
+    "state_abbr": "ME",
+    "slug": "augusta-me",
+    "county": "Kennebec County",
+    "population": 18899,
+    "lat": 44.3106,
+    "lng": -69.7795,
+    "zip": "04330",
+    "phase": 1,
+    "nearby_cities": [
+      "waterville-me",
+      "lewiston-me",
+      "auburn-me",
+      "brunswick-me",
+      "rockland-me"
+    ]
+  },
+  {
+    "name": "Bangor",
+    "state": "Maine",
+    "state_abbr": "ME",
+    "slug": "bangor-me",
+    "county": "Penobscot County",
+    "population": 31753,
+    "lat": 44.8012,
+    "lng": -68.7778,
+    "zip": "04401",
+    "phase": 1,
+    "nearby_cities": [
+      "brewer-me",
+      "ellsworth-me",
+      "bar-harbor-me",
+      "waterville-me"
+    ]
+  },
+  {
+    "name": "Bar Harbor",
+    "state": "Maine",
+    "state_abbr": "ME",
+    "slug": "bar-harbor-me",
+    "county": "Hancock County",
+    "population": 5518,
+    "lat": 44.3876,
+    "lng": -68.2042,
+    "zip": "04609",
+    "phase": 1,
+    "nearby_cities": [
+      "ellsworth-me",
+      "brewer-me",
+      "bangor-me",
+      "rockland-me"
+    ]
+  },
+  {
+    "name": "Biddeford",
+    "state": "Maine",
+    "state_abbr": "ME",
+    "slug": "biddeford-me",
+    "county": "York County",
+    "population": 22582,
+    "lat": 43.4926,
+    "lng": -70.4534,
+    "zip": "04005",
+    "phase": 1,
+    "nearby_cities": [
+      "saco-me",
+      "scarborough-me",
+      "westbrook-me",
+      "south-portland-me",
+      "portland-me"
+    ]
+  },
+  {
+    "name": "Brewer",
+    "state": "Maine",
+    "state_abbr": "ME",
+    "slug": "brewer-me",
+    "county": "Penobscot County",
+    "population": 9482,
+    "lat": 44.7954,
+    "lng": -68.7653,
+    "zip": "04412",
+    "phase": 1,
+    "nearby_cities": [
+      "bangor-me",
+      "ellsworth-me",
+      "bar-harbor-me",
+      "waterville-me"
+    ]
+  },
+  {
+    "name": "Brunswick",
+    "state": "Maine",
+    "state_abbr": "ME",
+    "slug": "brunswick-me",
+    "county": "Cumberland County",
+    "population": 20278,
+    "lat": 43.9148,
+    "lng": -69.9653,
+    "zip": "04011",
+    "phase": 1,
+    "nearby_cities": [
+      "lewiston-me",
+      "auburn-me",
+      "portland-me",
+      "south-portland-me",
+      "windham-me"
+    ]
+  },
+  {
+    "name": "Ellsworth",
+    "state": "Maine",
+    "state_abbr": "ME",
+    "slug": "ellsworth-me",
+    "county": "Hancock County",
+    "population": 9021,
+    "lat": 44.5434,
+    "lng": -68.4197,
+    "zip": "04605",
+    "phase": 1,
+    "nearby_cities": [
+      "bar-harbor-me",
+      "brewer-me",
+      "bangor-me",
+      "rockland-me"
+    ]
+  },
+  {
+    "name": "Lewiston",
+    "state": "Maine",
+    "state_abbr": "ME",
+    "slug": "lewiston-me",
+    "county": "Androscoggin County",
+    "population": 37121,
+    "lat": 44.1003,
+    "lng": -70.2148,
+    "zip": "04240",
+    "phase": 1,
+    "nearby_cities": [
+      "auburn-me",
+      "brunswick-me",
+      "windham-me",
+      "augusta-me",
+      "westbrook-me"
+    ]
+  },
+  {
+    "name": "Portland",
+    "state": "Maine",
+    "state_abbr": "ME",
+    "slug": "portland-me",
+    "county": "Cumberland County",
+    "population": 68408,
+    "lat": 43.6615,
+    "lng": -70.2553,
+    "zip": "04101",
+    "phase": 1,
+    "nearby_cities": [
+      "south-portland-me",
+      "westbrook-me",
+      "scarborough-me",
+      "windham-me",
+      "saco-me"
+    ]
+  },
+  {
+    "name": "Presque Isle",
+    "state": "Maine",
+    "state_abbr": "ME",
+    "slug": "presque-isle-me",
+    "county": "Aroostook County",
+    "population": 9268,
+    "lat": 46.6812,
+    "lng": -68.0152,
+    "zip": "04769",
+    "phase": 1,
+    "nearby_cities": []
+  },
+  {
+    "name": "Rockland",
+    "state": "Maine",
+    "state_abbr": "ME",
+    "slug": "rockland-me",
+    "county": "Knox County",
+    "population": 7297,
+    "lat": 44.1039,
+    "lng": -69.1089,
+    "zip": "04841",
+    "phase": 1,
+    "nearby_cities": [
+      "augusta-me",
+      "waterville-me",
+      "brunswick-me",
+      "ellsworth-me",
+      "bar-harbor-me"
+    ]
+  },
+  {
+    "name": "Saco",
+    "state": "Maine",
+    "state_abbr": "ME",
+    "slug": "saco-me",
+    "county": "York County",
+    "population": 19971,
+    "lat": 43.5009,
+    "lng": -70.4428,
+    "zip": "04072",
+    "phase": 1,
+    "nearby_cities": [
+      "biddeford-me",
+      "scarborough-me",
+      "westbrook-me",
+      "south-portland-me",
+      "portland-me"
+    ]
+  },
+  {
+    "name": "Sanford",
+    "state": "Maine",
+    "state_abbr": "ME",
+    "slug": "sanford-me",
+    "county": "York County",
+    "population": 21270,
+    "lat": 43.4393,
+    "lng": -70.7739,
+    "zip": "04073",
+    "phase": 1,
+    "nearby_cities": [
+      "rochester-nh",
+      "biddeford-me",
+      "saco-me",
+      "dover-nh",
+      "durham-nh"
+    ]
+  },
+  {
+    "name": "Scarborough",
+    "state": "Maine",
+    "state_abbr": "ME",
+    "slug": "scarborough-me",
+    "county": "Cumberland County",
+    "population": 22363,
+    "lat": 43.5784,
+    "lng": -70.3242,
+    "zip": "04074",
+    "phase": 1,
+    "nearby_cities": [
+      "south-portland-me",
+      "portland-me",
+      "westbrook-me",
+      "saco-me",
+      "biddeford-me"
+    ]
+  },
+  {
+    "name": "South Portland",
+    "state": "Maine",
+    "state_abbr": "ME",
+    "slug": "south-portland-me",
+    "county": "Cumberland County",
+    "population": 26352,
+    "lat": 43.6415,
+    "lng": -70.2759,
+    "zip": "04106",
+    "phase": 1,
+    "nearby_cities": [
+      "portland-me",
+      "scarborough-me",
+      "westbrook-me",
+      "saco-me",
+      "biddeford-me"
+    ]
+  },
+  {
+    "name": "Waterville",
+    "state": "Maine",
+    "state_abbr": "ME",
+    "slug": "waterville-me",
+    "county": "Kennebec County",
+    "population": 15722,
+    "lat": 44.5523,
+    "lng": -69.6317,
+    "zip": "04901",
+    "phase": 1,
+    "nearby_cities": [
+      "augusta-me",
+      "rockland-me",
+      "lewiston-me",
+      "auburn-me",
+      "bangor-me"
+    ]
+  },
+  {
+    "name": "Westbrook",
+    "state": "Maine",
+    "state_abbr": "ME",
+    "slug": "westbrook-me",
+    "county": "Cumberland County",
+    "population": 19710,
+    "lat": 43.6773,
+    "lng": -70.3745,
+    "zip": "04092",
+    "phase": 1,
+    "nearby_cities": [
+      "south-portland-me",
+      "portland-me",
+      "scarborough-me",
+      "windham-me",
+      "saco-me"
+    ]
+  },
+  {
+    "name": "Windham",
+    "state": "Maine",
+    "state_abbr": "ME",
+    "slug": "windham-me",
+    "county": "Cumberland County",
+    "population": 19142,
+    "lat": 43.8026,
+    "lng": -70.4342,
+    "zip": "04062",
+    "phase": 1,
+    "nearby_cities": [
+      "westbrook-me",
+      "portland-me",
+      "south-portland-me",
+      "scarborough-me",
+      "saco-me"
+    ]
+  },
+  {
+    "name": "Berlin",
+    "state": "New Hampshire",
+    "state_abbr": "NH",
+    "slug": "berlin-nh",
+    "county": "Coös County",
+    "population": 9695,
+    "lat": 44.4684,
+    "lng": -71.1853,
+    "zip": "03570",
+    "phase": 1,
+    "nearby_cities": []
+  },
+  {
+    "name": "Concord",
+    "state": "New Hampshire",
+    "state_abbr": "NH",
+    "slug": "concord-nh",
+    "county": "Merrimack County",
+    "population": 43976,
+    "lat": 43.2081,
+    "lng": -71.5376,
+    "zip": "03301",
+    "phase": 1,
+    "nearby_cities": [
+      "hooksett-nh",
+      "manchester-nh",
+      "laconia-nh",
+      "merrimack-nh",
+      "derry-nh"
+    ]
+  },
+  {
+    "name": "Derry",
+    "state": "New Hampshire",
+    "state_abbr": "NH",
+    "slug": "derry-nh",
+    "county": "Rockingham County",
+    "population": 33109,
+    "lat": 42.8812,
+    "lng": -71.3223,
+    "zip": "03038",
+    "phase": 1,
+    "nearby_cities": [
+      "londonderry-nh",
+      "windham-nh",
+      "salem-nh",
+      "hudson-nh",
+      "merrimack-nh"
+    ]
+  },
+  {
+    "name": "Dover",
+    "state": "New Hampshire",
+    "state_abbr": "NH",
+    "slug": "dover-nh",
+    "county": "Strafford County",
+    "population": 31922,
+    "lat": 43.1979,
+    "lng": -70.8737,
+    "zip": "03820",
+    "phase": 1,
+    "nearby_cities": [
+      "durham-nh",
+      "rochester-nh",
+      "portsmouth-nh",
+      "exeter-nh",
+      "sanford-me"
+    ]
+  },
+  {
+    "name": "Durham",
+    "state": "New Hampshire",
+    "state_abbr": "NH",
+    "slug": "durham-nh",
+    "county": "Strafford County",
+    "population": 15490,
+    "lat": 43.134,
+    "lng": -70.9264,
+    "zip": "03824",
+    "phase": 1,
+    "nearby_cities": [
+      "dover-nh",
+      "portsmouth-nh",
+      "exeter-nh",
+      "rochester-nh",
+      "sanford-me"
+    ]
+  },
+  {
+    "name": "Exeter",
+    "state": "New Hampshire",
+    "state_abbr": "NH",
+    "slug": "exeter-nh",
+    "county": "Rockingham County",
+    "population": 15420,
+    "lat": 42.9812,
+    "lng": -70.9478,
+    "zip": "03833",
+    "phase": 1,
+    "nearby_cities": [
+      "durham-nh",
+      "portsmouth-nh",
+      "dover-nh",
+      "salem-nh",
+      "derry-nh"
+    ]
+  },
+  {
+    "name": "Hanover",
+    "state": "New Hampshire",
+    "state_abbr": "NH",
+    "slug": "hanover-nh",
+    "county": "Grafton County",
+    "population": 11870,
+    "lat": 43.7023,
+    "lng": -72.2895,
+    "zip": "03755",
+    "phase": 1,
+    "nearby_cities": [
+      "lebanon-nh",
+      "laconia-nh"
+    ]
+  },
+  {
+    "name": "Hooksett",
+    "state": "New Hampshire",
+    "state_abbr": "NH",
+    "slug": "hooksett-nh",
+    "county": "Merrimack County",
+    "population": 14704,
+    "lat": 43.0979,
+    "lng": -71.4648,
+    "zip": "03106",
+    "phase": 1,
+    "nearby_cities": [
+      "manchester-nh",
+      "concord-nh",
+      "merrimack-nh",
+      "derry-nh",
+      "londonderry-nh"
+    ]
+  },
+  {
+    "name": "Hudson",
+    "state": "New Hampshire",
+    "state_abbr": "NH",
+    "slug": "hudson-nh",
+    "county": "Hillsborough County",
+    "population": 25716,
+    "lat": 42.764,
+    "lng": -71.4065,
+    "zip": "03051",
+    "phase": 1,
+    "nearby_cities": [
+      "nashua-nh",
+      "pelham-nh",
+      "windham-nh",
+      "londonderry-nh",
+      "merrimack-nh"
+    ]
+  },
+  {
+    "name": "Keene",
+    "state": "New Hampshire",
+    "state_abbr": "NH",
+    "slug": "keene-nh",
+    "county": "Cheshire County",
+    "population": 23409,
+    "lat": 42.9334,
+    "lng": -72.2779,
+    "zip": "03431",
+    "phase": 1,
+    "nearby_cities": [
+      "merrimack-nh",
+      "manchester-nh",
+      "concord-nh",
+      "hooksett-nh",
+      "nashua-nh"
+    ]
+  },
+  {
+    "name": "Laconia",
+    "state": "New Hampshire",
+    "state_abbr": "NH",
+    "slug": "laconia-nh",
+    "county": "Belknap County",
+    "population": 16993,
+    "lat": 43.5279,
+    "lng": -71.4703,
+    "zip": "03246",
+    "phase": 1,
+    "nearby_cities": [
+      "concord-nh",
+      "rochester-nh",
+      "hooksett-nh",
+      "sanford-me",
+      "manchester-nh"
+    ]
+  },
+  {
+    "name": "Lebanon",
+    "state": "New Hampshire",
+    "state_abbr": "NH",
+    "slug": "lebanon-nh",
+    "county": "Grafton County",
+    "population": 13151,
+    "lat": 43.6423,
+    "lng": -72.2518,
+    "zip": "03766",
+    "phase": 1,
+    "nearby_cities": [
+      "hanover-nh",
+      "laconia-nh",
+      "concord-nh",
+      "keene-nh"
+    ]
+  },
+  {
+    "name": "Londonderry",
+    "state": "New Hampshire",
+    "state_abbr": "NH",
+    "slug": "londonderry-nh",
+    "county": "Rockingham County",
+    "population": 25837,
+    "lat": 42.8651,
+    "lng": -71.3737,
+    "zip": "03053",
+    "phase": 1,
+    "nearby_cities": [
+      "derry-nh",
+      "windham-nh",
+      "merrimack-nh",
+      "hudson-nh",
+      "nashua-nh"
+    ]
+  },
+  {
+    "name": "Manchester",
+    "state": "New Hampshire",
+    "state_abbr": "NH",
+    "slug": "manchester-nh",
+    "county": "Hillsborough County",
+    "population": 115644,
+    "lat": 42.9956,
+    "lng": -71.4548,
+    "zip": "03101",
+    "phase": 1,
+    "nearby_cities": [
+      "hooksett-nh",
+      "merrimack-nh",
+      "londonderry-nh",
+      "derry-nh",
+      "windham-nh"
+    ]
+  },
+  {
+    "name": "Merrimack",
+    "state": "New Hampshire",
+    "state_abbr": "NH",
+    "slug": "merrimack-nh",
+    "county": "Hillsborough County",
+    "population": 27214,
+    "lat": 42.8654,
+    "lng": -71.5118,
+    "zip": "03054",
+    "phase": 1,
+    "nearby_cities": [
+      "londonderry-nh",
+      "nashua-nh",
+      "hudson-nh",
+      "manchester-nh",
+      "derry-nh"
+    ]
+  },
+  {
+    "name": "Nashua",
+    "state": "New Hampshire",
+    "state_abbr": "NH",
+    "slug": "nashua-nh",
+    "county": "Hillsborough County",
+    "population": 91322,
+    "lat": 42.7654,
+    "lng": -71.4676,
+    "zip": "03060",
+    "phase": 1,
+    "nearby_cities": [
+      "hudson-nh",
+      "merrimack-nh",
+      "pelham-nh",
+      "londonderry-nh",
+      "windham-nh"
+    ]
+  },
+  {
+    "name": "Pelham",
+    "state": "New Hampshire",
+    "state_abbr": "NH",
+    "slug": "pelham-nh",
+    "county": "Hillsborough County",
+    "population": 14341,
+    "lat": 42.7354,
+    "lng": -71.3237,
+    "zip": "03076",
+    "phase": 1,
+    "nearby_cities": [
+      "hudson-nh",
+      "windham-nh",
+      "salem-nh",
+      "nashua-nh",
+      "londonderry-nh"
+    ]
+  },
+  {
+    "name": "Portsmouth",
+    "state": "New Hampshire",
+    "state_abbr": "NH",
+    "slug": "portsmouth-nh",
+    "county": "Rockingham County",
+    "population": 22187,
+    "lat": 43.0718,
+    "lng": -70.7626,
+    "zip": "03801",
+    "phase": 1,
+    "nearby_cities": [
+      "durham-nh",
+      "dover-nh",
+      "exeter-nh",
+      "rochester-nh",
+      "sanford-me"
+    ]
+  },
+  {
+    "name": "Rochester",
+    "state": "New Hampshire",
+    "state_abbr": "NH",
+    "slug": "rochester-nh",
+    "county": "Strafford County",
+    "population": 32403,
+    "lat": 43.3048,
+    "lng": -70.9748,
+    "zip": "03867",
+    "phase": 1,
+    "nearby_cities": [
+      "dover-nh",
+      "durham-nh",
+      "sanford-me",
+      "portsmouth-nh",
+      "exeter-nh"
+    ]
+  },
+  {
+    "name": "Salem",
+    "state": "New Hampshire",
+    "state_abbr": "NH",
+    "slug": "salem-nh",
+    "county": "Rockingham County",
+    "population": 30768,
+    "lat": 42.7876,
+    "lng": -71.2012,
+    "zip": "03079",
+    "phase": 1,
+    "nearby_cities": [
+      "windham-nh",
+      "pelham-nh",
+      "derry-nh",
+      "londonderry-nh",
+      "hudson-nh"
+    ]
+  },
+  {
+    "name": "Windham",
+    "state": "New Hampshire",
+    "state_abbr": "NH",
+    "slug": "windham-nh",
+    "county": "Rockingham County",
+    "population": 14904,
+    "lat": 42.8065,
+    "lng": -71.3007,
+    "zip": "03087",
+    "phase": 1,
+    "nearby_cities": [
+      "pelham-nh",
+      "salem-nh",
+      "derry-nh",
+      "londonderry-nh",
+      "hudson-nh"
+    ]
+  }
+]

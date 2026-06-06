@@ -1,0 +1,49 @@
+---
+interface Company {
+  name: string
+  address: string
+  zip: string
+  phone: string
+  rating: number
+  review_count: number
+}
+
+interface Props {
+  companies: Company[]
+  cityName: string   // "Portland"
+  stateAbbr: string  // "ME"
+}
+
+const { companies, cityName, stateAbbr } = Astro.props
+
+const graph = companies.map((c) => {
+  const node: Record<string, unknown> = {
+    '@type': 'LocalBusiness',
+    name: c.name,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: c.address,
+      addressLocality: cityName,
+      addressRegion: stateAbbr,
+      postalCode: c.zip,
+    },
+  }
+  if (c.phone) node.telephone = c.phone
+  if (c.review_count > 0) {
+    node.aggregateRating = {
+      '@type': 'AggregateRating',
+      ratingValue: c.rating,
+      reviewCount: c.review_count,
+    }
+  }
+  return node
+})
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': graph,
+}
+---
+{companies.length > 0 && (
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+)}

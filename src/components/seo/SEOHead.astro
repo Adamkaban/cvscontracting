@@ -1,0 +1,56 @@
+---
+import config from '../../../site.config.ts'
+import geistFontUrl from '@fontsource/geist/files/geist-latin-400-normal.woff2?url'
+
+interface Props {
+  title: string
+  description?: string
+  canonicalUrl?: string
+  ogImage?: string
+  noindex?: boolean
+}
+
+const { title, description, canonicalUrl, ogImage, noindex = false } = Astro.props
+
+const siteUrl = (import.meta.env.SITE_URL ?? config.seo.siteUrl).replace(/\/$/, '')
+
+// Canonical: HTTPS, no trailing slash, no query string
+const rawPath = canonicalUrl ?? Astro.url.pathname
+const cleanPath = rawPath.replace(/\/$/, '') || '/'
+const canonical = cleanPath === '/' ? siteUrl : siteUrl + cleanPath
+
+// Title via template
+const finalTitle = config.seo.titleTemplate.replace('%s', title)
+
+// Description, capped at 155 chars
+const rawDescription = description ?? config.seo.defaultDescription
+const metaDescription =
+  rawDescription.length > 155 ? rawDescription.slice(0, 152).trimEnd() + '…' : rawDescription
+
+// OG image — absolute URL
+const rawOgImage = ogImage ?? config.seo.ogImage
+const ogImageUrl = rawOgImage.startsWith('http') ? rawOgImage : siteUrl + rawOgImage
+
+const robots = noindex ? 'noindex, nofollow' : 'index, follow'
+---
+<title>{finalTitle}</title>
+<meta name="description" content={metaDescription} />
+<link rel="canonical" href={canonical} />
+<meta name="robots" content={robots} />
+
+{/* Open Graph */}
+<meta property="og:title" content={finalTitle} />
+<meta property="og:description" content={metaDescription} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:url" content={canonical} />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={config.brand.name} />
+
+{/* Twitter Card */}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={finalTitle} />
+<meta name="twitter:description" content={metaDescription} />
+<meta name="twitter:image" content={ogImageUrl} />
+
+{/* Preload Geist (woff2, Latin 400) */}
+<link rel="preload" href={geistFontUrl} as="font" type="font/woff2" crossorigin />

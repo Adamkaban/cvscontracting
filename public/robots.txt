@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /claim/
+
+Sitemap: https://cvscontracting.com/sitemap-index.xml

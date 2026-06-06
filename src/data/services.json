@@ -1,0 +1,70 @@
+[
+  {
+    "name": "Foundation Repair",
+    "slug": "foundation-repair",
+    "description": "Expert foundation repair contractors for crack repair, underpinning, wall stabilization, and structural fixes.",
+    "avg_cost_min": 2000,
+    "avg_cost_max": 15000,
+    "lead_value_min": 50,
+    "lead_value_max": 150,
+    "affiliate_url": "https://www.angi.com/companylist/foundation-repair.htm",
+    "priority": 1,
+    "keywords": [
+      "foundation repair",
+      "foundation contractor",
+      "foundation crack repair",
+      "foundation problems"
+    ]
+  },
+  {
+    "name": "Excavation Contractors",
+    "slug": "excavation-contractors",
+    "description": "Licensed excavation contractors for site prep, grading, trenching, land clearing, and utility work.",
+    "avg_cost_min": 1500,
+    "avg_cost_max": 12000,
+    "lead_value_min": 40,
+    "lead_value_max": 120,
+    "affiliate_url": "https://www.angi.com/companylist/excavating-contractors.htm",
+    "priority": 1,
+    "keywords": [
+      "excavation contractors",
+      "excavating contractor",
+      "site excavation",
+      "land excavation"
+    ]
+  },
+  {
+    "name": "Basement Waterproofing",
+    "slug": "basement-waterproofing",
+    "description": "Trusted basement waterproofing contractors for interior drainage, sump pumps, exterior waterproofing, and encapsulation.",
+    "avg_cost_min": 3000,
+    "avg_cost_max": 10000,
+    "lead_value_min": 60,
+    "lead_value_max": 150,
+    "affiliate_url": "https://www.angi.com/companylist/waterproofing.htm",
+    "priority": 1,
+    "keywords": [
+      "basement waterproofing",
+      "waterproofing contractor",
+      "wet basement",
+      "basement leak repair"
+    ]
+  },
+  {
+    "name": "Snow Removal",
+    "slug": "snow-removal",
+    "description": "Commercial and residential snow removal services including plowing, salting, and seasonal contracts.",
+    "avg_cost_min": 300,
+    "avg_cost_max": 3000,
+    "lead_value_min": 30,
+    "lead_value_max": 80,
+    "affiliate_url": "https://www.angi.com/companylist/snow-removal.htm",
+    "priority": 1,
+    "keywords": [
+      "snow removal",
+      "snow plowing",
+      "snow removal service",
+      "commercial snow removal"
+    ]
+  }
+]

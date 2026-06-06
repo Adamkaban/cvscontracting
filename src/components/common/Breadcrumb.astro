@@ -1,0 +1,62 @@
+---
+import config from '../../../site.config.ts'
+
+interface Props {
+  items: Array<{
+    label: string
+    href?: string  // if absent, this is the current page (not clickable)
+  }>
+}
+
+const { items } = Astro.props
+
+const siteUrl = (import.meta.env.SITE_URL ?? config.seo.siteUrl).replace(/\/$/, '')
+
+// Current page canonical (for the last breadcrumb item without href)
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
+const currentUrl = currentPath === '/' ? siteUrl : siteUrl + currentPath
+
+const itemUrl = (href?: string): string => {
+  if (!href) return currentUrl
+  if (href.startsWith('http')) return href
+  const clean = href.replace(/\/$/, '') || '/'
+  return clean === '/' ? siteUrl : siteUrl + clean
+}
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((item, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: item.label,
+    item: itemUrl(item.href),
+  })),
+}
+---
+<nav aria-label="Breadcrumb" class="text-sm mb-4">
+  <ol class="flex flex-wrap items-center gap-1">
+    {items.map((item, i) => (
+      <li class="flex items-center gap-1">
+        {item.href ? (
+          <a href={item.href} class="text-blue-700 hover:underline">{item.label}</a>
+        ) : (
+          <span class="text-gray-900 font-medium" aria-current="page">{item.label}</span>
+        )}
+        {i < items.length - 1 && (
+          <svg
+            class="text-gray-400"
+            width="12"
+            height="12"
+            viewBox="0 0 256 256"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z" />
+          </svg>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+<script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />

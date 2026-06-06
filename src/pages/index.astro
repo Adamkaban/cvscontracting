@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import OrganizationSchema from '../components/schema/OrganizationSchema.astro'
+import Breadcrumb from '../components/common/Breadcrumb.astro'
+import config from '../../site.config.ts'
+---
+<BaseLayout title="Contractor Services in Maine & Northeast US">
+  <OrganizationSchema slot="schema" />
+  <main class="container section">
+    <Breadcrumb items={[{ label: "Home" }]} />
+    <h1>{config.brand.name}</h1>
+    <p>Affiliate CTA: {config.affiliate.ctaText}</p>
+    <p>Phase 1: ME + NH</p>
+  </main>
+</BaseLayout>
