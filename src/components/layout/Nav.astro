@@ -6,31 +6,34 @@ import type { ServiceEntry } from '../../types'
 const phase = parseInt(import.meta.env.PUBLIC_PHASE ?? '1')
 const services = (servicesData as ServiceEntry[]).filter((s) => s.priority <= phase)
 ---
-<header class="border-b border-gray-200 bg-white">
-  <nav class="container flex items-center justify-between h-16" aria-label="Main">
-    <a href="/" class="text-lg font-bold text-gray-900 tracking-tight">{config.brand.name}</a>
+<header class="sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur">
+  <nav class="container flex h-16 items-center justify-between" aria-label="Main">
+    <a href="/" class="flex items-center gap-2 text-lg font-bold tracking-tight text-ink">
+      {config.brand.name}
+      <span class="hidden rounded-full border border-line bg-white px-2 py-0.5 text-xs font-medium text-gray-600 sm:inline">Maine & NH</span>
+    </a>
 
-    {/* Desktop links */}
-    <ul class="hidden md:flex items-center gap-6">
+    <ul class="hidden items-center gap-6 md:flex">
       {services.map((s) => (
-        <li>
-          <a href={`/${s.slug}`} class="text-sm text-gray-700 hover:text-blue-700">{s.name}</a>
-        </li>
+        <li><a href={`/${s.slug}`} class="text-sm text-gray-700 hover:text-blue-700">{s.name}</a></li>
       ))}
+      <li>
+        <a href={services[0] ? `/${services[0].slug}` : '/'}
+           class="rounded-md bg-blue-700 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-800">
+          {config.affiliate.ctaText}
+        </a>
+      </li>
     </ul>
 
-    {/* Mobile menu — CSS only, no JS */}
-    <details class="md:hidden relative">
-      <summary class="list-none cursor-pointer p-2 -mr-2" aria-label="Open menu">
-        <svg width="24" height="24" viewBox="0 0 256 256" fill="currentColor" class="text-gray-900" aria-hidden="true">
+    <details class="relative md:hidden">
+      <summary class="-mr-2 cursor-pointer list-none p-2" aria-label="Open menu">
+        <svg width="24" height="24" viewBox="0 0 256 256" fill="currentColor" class="text-ink" aria-hidden="true">
           <path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z" />
         </svg>
       </summary>
-      <ul class="absolute right-0 top-full mt-2 w-56 bg-white border border-gray-200 rounded-lg shadow-md py-2 z-10">
+      <ul class="absolute right-0 top-full mt-2 w-56 rounded-lg border border-line bg-white py-2 shadow-md">
         {services.map((s) => (
-          <li>
-            <a href={`/${s.slug}`} class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-700">{s.name}</a>
-          </li>
+          <li><a href={`/${s.slug}`} class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-700">{s.name}</a></li>
         ))}
       </ul>
     </details>
@@ -38,7 +41,5 @@ const services = (servicesData as ServiceEntry[]).filter((s) => s.priority <= ph
 </header>
 
 <style>
-  details > summary::-webkit-details-marker {
-    display: none;
-  }
+  details > summary::-webkit-details-marker { display: none; }
 </style>
