@@ -16,8 +16,25 @@
   --color-success:      #15803D;   /* green-700 */
   --color-warning:      #F59E0B;   /* amber-500 */
   --color-stars:        #FBBF24;   /* amber-400 */
+  --color-paper:        #FAFAF7;   /* warm page background */
+  --color-ink:          #0F172A;   /* headings, nav wordmark, footer */
+  --color-line:         #E7E5E4;   /* warm hairline borders */
+  --color-tint:         #FAFAF9;   /* alt section background */
 
   --font-sans: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* warm paper base + editorial-data numerals */
+html, body { background-color: #FAFAF7; }
+
+.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #6b7280; /* gray-500 */
 }
 
 /* ─── CSS variables (for JS components and edge cases) ── */
