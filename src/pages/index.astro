@@ -158,14 +158,18 @@ const nhCityCount = cities.filter((c) => c.state_abbr === 'NH').length
   <section class="border-y border-line bg-tint">
     <div class="container py-16">
       <Eyebrow text="Popular areas" />
-      <h2 class="mt-2 text-3xl font-semibold tracking-tight text-ink">Top cities</h2>
+      <h2 class="mt-2 text-3xl font-semibold tracking-tight text-ink">Top Cities in Maine & New Hampshire</h2>
       <div class="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-        {topCities.map((c, i) => (
-          <a href={`/${services[i % services.length]?.slug}/${c.slug}`} class="rounded-lg border border-line bg-white px-4 py-3 text-sm hover:border-blue-700">
+        {topCities.map((c) => (
+          <a href={`/basement-waterproofing/${c.slug}`} class="rounded-lg border border-line bg-white px-4 py-3 text-sm hover:border-blue-700">
             <span class="font-medium text-ink">{c.name}, {c.state_abbr}</span>
             <span class="block text-xs text-gray-500">{c.county}</span>
           </a>
         ))}
+      </div>
+      <div class="mt-6 flex flex-wrap gap-6">
+        <a href="/maine" class="text-sm font-medium text-blue-700 hover:underline">View all Maine cities &rarr;</a>
+        <a href="/new-hampshire" class="text-sm font-medium text-blue-700 hover:underline">View all New Hampshire cities &rarr;</a>
       </div>
     </div>
   </section>
