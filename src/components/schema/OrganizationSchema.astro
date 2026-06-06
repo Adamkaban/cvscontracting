@@ -1,25 +1,46 @@
 ---
 import config from '../../../site.config.ts'
 
+interface Props {
+  faqs?: Array<{ question: string; answer: string }>
+}
+
+const { faqs } = Astro.props
+
 const siteUrl = (import.meta.env.SITE_URL ?? config.seo.siteUrl).replace(/\/$/, '')
 
-// Phase 1: Organization + WebSite only. No SearchAction until search exists.
+const graph: object[] = [
+  {
+    '@type': 'Organization',
+    name: config.brand.name,
+    url: siteUrl,
+    logo: siteUrl + config.brand.logo,
+    description: config.seo.defaultDescription,
+  },
+  {
+    '@type': 'WebSite',
+    url: siteUrl,
+    name: config.brand.name,
+  },
+]
+
+if (faqs && faqs.length > 0) {
+  graph.push({
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: f.answer,
+      },
+    })),
+  })
+}
+
 const schema = {
   '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'Organization',
-      name: config.brand.name,
-      url: siteUrl,
-      logo: siteUrl + config.brand.logo,
-      description: config.seo.defaultDescription,
-    },
-    {
-      '@type': 'WebSite',
-      url: siteUrl,
-      name: config.brand.name,
-    },
-  ],
+  '@graph': graph,
 }
 ---
 <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
