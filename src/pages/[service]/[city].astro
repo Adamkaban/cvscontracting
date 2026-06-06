@@ -7,6 +7,7 @@ import servicesData from '../../data/services.json'
 import type { CityEntry, ServiceEntry, CompanyEntry } from '../../types'
 
 import Breadcrumb from '../../components/common/Breadcrumb.astro'
+import Eyebrow from '../../components/common/Eyebrow.astro'
 import CompanyList from '../../components/city/CompanyList.astro'
 import CostSection from '../../components/city/CostSection.astro'
 import HowToChoose from '../../components/city/HowToChoose.astro'
@@ -106,13 +107,14 @@ const canonicalPath = `/${service.slug}/${city.slug}`
       ]}
     />
 
-    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">
+    <Eyebrow text={`${service.name} contractors`} />
+    <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-ink">
       {service.name} in {city.name}, {city.state_abbr}
     </h1>
-    <p class="text-base text-gray-600 leading-relaxed mt-4 max-w-2xl">{intro}</p>
+    <p class="text-gray-600 leading-relaxed mt-4 max-w-2xl">{intro}</p>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
-      <div class="lg:col-span-2">
+    <div class="mt-8 grid grid-cols-1 lg:grid-cols-[70fr_30fr] gap-10">
+      <div>
         <CompanyList
           companies={companies}
           cityName={city.name}
@@ -138,7 +140,7 @@ const canonicalPath = `/${service.slug}/${city.slug}`
         />
       </div>
 
-      <div class="lg:col-span-1">
+      <div>
         <CTASidebar
           cityName={city.name}
           costMin={service.avg_cost_min}

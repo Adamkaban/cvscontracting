@@ -13,12 +13,12 @@ interface Props {
 const { companies, cityName, serviceName, affiliateUrl, affiliateRel } = Astro.props
 ---
 <section>
-  <h2 class="text-2xl font-semibold text-gray-900 tracking-tight">
+  <h2 class="text-2xl font-semibold text-ink tracking-tight">
     Top {serviceName} Contractors in {cityName}
   </h2>
-  <div class="flex flex-col gap-4 mt-4">
-    {companies.map((company) => (
-      <CompanyCard company={company} affiliateUrl={affiliateUrl} affiliateRel={affiliateRel} />
+  <div class="space-y-4 mt-4">
+    {companies.map((company, i) => (
+      <CompanyCard company={company} rank={i + 1} affiliateUrl={affiliateUrl} affiliateRel={affiliateRel} />
     ))}
   </div>
 
