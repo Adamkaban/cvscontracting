@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content'
 import SiteLayout from '../../layouts/SiteLayout.astro'
 import Breadcrumb from '../../components/common/Breadcrumb.astro'
+import Eyebrow from '../../components/common/Eyebrow.astro'
 
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
@@ -15,21 +16,25 @@ const fmt = (d: Date) =>
   description="Cost guides, how-tos, and comparisons for foundations, basement waterproofing, excavation, and snow removal across Maine and New Hampshire."
   canonicalUrl="/blog"
 >
-  <div class="container section max-w-3xl">
+  <div class="container py-16 max-w-3xl">
     <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Blog' }]} />
-    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">Blog</h1>
+    <Eyebrow text="Blog" />
+    <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-ink mt-2">Blog</h1>
     <p class="text-base text-gray-600 leading-relaxed mt-3">
       Cost guides and practical advice for Northeast homeowners.
     </p>
 
-    <ul class="mt-8 divide-y divide-gray-200 border-t border-gray-200">
+    <ul class="mt-8 space-y-4">
       {posts.map((post) => (
-        <li class="py-6">
-          <p class="text-xs text-gray-500">{fmt(post.data.pubDate)}</p>
-          <h2 class="text-xl font-semibold text-gray-900 mt-1">
-            <a href={`/blog/${post.id}`} class="hover:text-blue-700">{post.data.title}</a>
-          </h2>
-          <p class="text-gray-600 mt-1">{post.data.description}</p>
+        <li>
+          <a
+            href={`/blog/${post.id}`}
+            class="block rounded-xl border border-line bg-white p-6 hover:border-blue-700"
+          >
+            <p class="num text-xs text-gray-500">{fmt(post.data.pubDate)}</p>
+            <p class="text-lg font-semibold text-ink mt-1">{post.data.title}</p>
+            <p class="text-gray-600 mt-1 text-sm leading-relaxed">{post.data.description}</p>
+          </a>
         </li>
       ))}
     </ul>
