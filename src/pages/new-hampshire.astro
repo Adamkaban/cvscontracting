@@ -5,13 +5,30 @@ import FAQAccordion from '../components/common/FAQAccordion.astro'
 import Eyebrow from '../components/common/Eyebrow.astro'
 import citiesData from '../data/cities.json'
 import servicesData from '../data/services.json'
-import type { CityEntry, ServiceEntry } from '../types'
+import type { CityEntry, ServiceEntry, CompanyEntry } from '../types'
 
 const phase = parseInt(import.meta.env.PUBLIC_PHASE ?? '1')
 const services = (servicesData as ServiceEntry[]).filter((s) => s.priority <= phase)
 const cities = (citiesData as CityEntry[]).filter(
   (c) => c.state === 'New Hampshire' && c.phase <= phase,
 )
+
+// Build per-city service link map (same as locations.astro)
+const cityServiceMap: Record<string, { slug: string; name: string }[]> = {}
+for (const service of services) {
+  const companies: CompanyEntry[] = await import(`../data/companies/${service.slug}.json`)
+    .then((m) => m.default as CompanyEntry[])
+    .catch(() => [])
+  for (const city of cities) {
+    const count = companies.filter(
+      (co) => co.city_slug === city.slug && co.rating >= 3.5,
+    ).length
+    if (count >= 3) {
+      if (!cityServiceMap[city.slug]) cityServiceMap[city.slug] = []
+      cityServiceMap[city.slug].push({ slug: service.slug, name: service.name })
+    }
+  }
+}
 
 const faqs = [
   {
@@ -63,7 +80,7 @@ const faqs = [
         {services.map((s) => (
           <li>
             <a
-              href={`/${s.slug}`}
+              href={`/${s.slug}/new-hampshire`}
               class="flex flex-col gap-1 rounded-xl border border-line bg-white p-5 hover:border-blue-700 hover:shadow-sm transition-shadow duration-150"
             >
               <span class="text-base font-semibold text-ink">{s.name}</span>
@@ -80,19 +97,32 @@ const faqs = [
     <section class="mt-12">
       <h2 class="text-2xl font-semibold text-ink tracking-tight">New Hampshire Cities We Serve</h2>
       <p class="text-gray-600 mt-2">
-        Select your city to browse contractors and compare quotes for any service.
+        Select a city and service to browse licensed contractors near you.
       </p>
-      <ul class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 mt-6">
-        {cities.map((c) => (
-          <li>
-            <a
-              href={`/basement-waterproofing/${c.slug}`}
-              class="block rounded-lg border border-line bg-white px-4 py-3 text-sm text-blue-700 hover:border-blue-700"
-            >
-              {c.name}
-            </a>
-          </li>
-        ))}
+      <ul class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 mt-6">
+        {cities.map((c) => {
+          const svcLinks = cityServiceMap[c.slug] ?? []
+          return (
+            <li class="rounded-lg border border-line bg-white px-4 py-3">
+              <p class="font-medium text-ink text-sm">{c.name}</p>
+              <p class="text-xs text-gray-500 mb-2">{c.county}</p>
+              {svcLinks.length > 0 ? (
+                <div class="flex flex-wrap gap-1">
+                  {svcLinks.map((svc) => (
+                    <a
+                      href={`/${svc.slug}/${c.slug}`}
+                      class="inline-block rounded bg-blue-50 px-2 py-0.5 text-xs text-blue-700 hover:bg-blue-100"
+                    >
+                      {svc.name}
+                    </a>
+                  ))}
+                </div>
+              ) : (
+                <p class="text-xs text-gray-400">No listings yet</p>
+              )}
+            </li>
+          )
+        })}
       </ul>
     </section>
 
