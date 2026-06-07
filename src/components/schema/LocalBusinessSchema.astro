@@ -16,26 +16,44 @@ interface Props {
 
 const { companies, cityName, stateAbbr } = Astro.props
 
+const PHONE_RE = /^\(\d{3}\)\s\d{3}-\d{4}$/
+
 const graph = companies.map((c) => {
   const node: Record<string, unknown> = {
     '@type': 'LocalBusiness',
     name: c.name,
-    address: {
+  }
+
+  // Only emit address when it's a real street address (starts with a digit).
+  // "Serving Portland, ME and surrounding areas" strings must not go into
+  // PostalAddress.streetAddress — Google's validator rejects them.
+  if (c.address && /^\d/.test(c.address)) {
+    node.address = {
       '@type': 'PostalAddress',
       streetAddress: c.address,
       addressLocality: cityName,
       addressRegion: stateAbbr,
       postalCode: c.zip,
-    },
+      addressCountry: 'US',
+    }
   }
-  if (c.phone) node.telephone = c.phone
+
+  // Only emit telephone when it matches the normalized (###) ###-#### format.
+  // Rejects: "N/A", "Not provided", "833-632-7225", ":", and other garbage strings.
+  if (c.phone && PHONE_RE.test(c.phone)) {
+    node.telephone = c.phone
+  }
+
   if (c.review_count > 0) {
     node.aggregateRating = {
       '@type': 'AggregateRating',
       ratingValue: c.rating,
       reviewCount: c.review_count,
+      bestRating: 5,
+      worstRating: 1,
     }
   }
+
   return node
 })
 
