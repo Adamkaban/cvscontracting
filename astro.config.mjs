@@ -11,7 +11,10 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap({
-      filter: (page) => !page.includes('/affiliate-disclosure') && !page.includes('/claim'),
+      filter: (page) =>
+        !page.includes('/affiliate-disclosure') &&
+        !page.includes('/claim') &&
+        !page.includes('/404'),
     }),
   ],
   vite: {

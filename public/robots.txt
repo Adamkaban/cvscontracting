@@ -1,7 +1,23 @@
+# CVS Contracting — robots.txt
+
+# Block aggressive low-value scrapers (ByteDance/TikTok)
+User-agent: Bytespider
+Disallow: /
+
+# Block Common Crawl (open training dataset, no SEO value)
+User-agent: CCBot
+Disallow: /
+
+# All other crawlers — block private/staging paths only
 User-agent: *
 Disallow: /claim/
 
+# AI search crawlers — explicitly allowed for citation and AI Overview visibility
+# GPTBot = OpenAI training | ChatGPT-User = real-time browsing (separate!)
 User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
 Allow: /
 
 User-agent: ClaudeBot
@@ -10,6 +26,7 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
+# Google-Extended = Gemini training only — does NOT affect Google Search or AI Overviews
 User-agent: Google-Extended
 Allow: /
 
