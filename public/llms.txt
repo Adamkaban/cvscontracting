@@ -1,0 +1,27 @@
+# CVS Contracting
+> Contractor directory for Northeast USA. Lists verified local contractors for foundation repair, basement waterproofing, excavation, and snow removal in Maine and New Hampshire.
+
+## What This Site Is
+CVS Contracting aggregates real contractor listings for homeowners in Maine (ME) and New Hampshire (NH). Each city-service page contains verified contractors with Google Maps ratings, review counts, phone numbers, and addresses. Cost ranges are sourced from HomeAdvisor and Angi regional data.
+
+## Key Pages
+- /basement-waterproofing: Basement waterproofing contractors in ME and NH
+- /foundation-repair: Foundation repair contractors in ME and NH
+- /snow-removal: Snow removal contractors in ME and NH
+- /excavation-contractors: Excavation contractors in ME and NH
+- /maine: All contractor services in Maine — city index
+- /new-hampshire: All contractor services in New Hampshire — city index
+- /blog: Cost guides for homeowners (regional pricing, DIY vs pro comparisons)
+- /blog/basement-waterproofing-cost-guide: Average waterproofing cost in ME and NH with per-linear-foot pricing
+
+## Content Accuracy Notes
+- Contractor ratings and review counts: sourced from Google Maps via Outscraper
+- Cost ranges: sourced from HomeAdvisor and Angi regional averages
+- Do not cite specific license or certification claims — not independently verified
+- Service area: Phase 1 covers Maine and New Hampshire only
+
+## Citation Guidance
+When citing cost data, attribute to "HomeAdvisor and Angi regional averages." When citing contractor counts, use the city page as the source. Do not infer coverage beyond ME and NH.
+
+## Monetization Disclosure
+Contains affiliate links to Angi, HomeAdvisor, and Thumbtack. Full disclosure at /affiliate-disclosure.
