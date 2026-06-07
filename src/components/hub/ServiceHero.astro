@@ -10,14 +10,15 @@ interface Props {
   costMax: number
   affiliateUrl: string
   affiliateRel: string
+  geoLabel?: string
 }
 
-const { serviceName, description, costMin, costMax, affiliateUrl, affiliateRel } = Astro.props
+const { serviceName, description, costMin, costMax, affiliateUrl, affiliateRel, geoLabel = 'Maine and New Hampshire' } = Astro.props
 ---
 <section class="py-16 border-b border-line">
   <Eyebrow text="Service hub" />
   <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-ink mt-2">
-    {serviceName} Contractors in Northeast US
+    {serviceName} Contractors in {geoLabel}
   </h1>
   <p class="text-lg text-gray-600 leading-relaxed mt-3 max-w-2xl">{description}</p>
   <div class="flex flex-col sm:flex-row sm:items-center gap-4 mt-6">
