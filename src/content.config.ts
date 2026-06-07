@@ -9,6 +9,7 @@ const services = defineCollection({
     title: z.string(),
     description: z.string().max(155),
     updatedDate: z.coerce.date(),
+    introText: z.string().optional(), // 1-2 sentences rendered above CityGrid
     howItWorks: z.object({
       steps: z.array(z.string()),
       timeline: z.string(),
