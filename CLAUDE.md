@@ -28,11 +28,36 @@ npx astro check
 ## Key Files
 
 ```
-src/data/cities.json              # city data — single source of truth
-src/data/services.json            # service slugs, cost ranges, affiliate URLs
-src/data/companies/[service].json # scraped company data from Outscraper
-src/pages/[service]/[city].astro  # programmatic city-service pages
-src/content/blog/                 # MDX blog posts
+src/data/cities.json                    # city data — single source of truth
+src/data/services.json                  # service slugs, cost ranges, affiliate URLs
+src/data/companies/[service].json       # scraped company data from Outscraper
+src/content/blog/                       # MDX blog posts (1 of 8 written: cost guide)
+
+src/pages/index.astro                   # home
+src/pages/[service]/index.astro         # service hub
+src/pages/[service]/[city].astro        # programmatic city-service pages
+src/pages/[service]/maine.astro         # ME state landing per service
+src/pages/[service]/new-hampshire.astro # NH state landing per service
+src/pages/maine.astro                   # ME state overview
+src/pages/new-hampshire.astro           # NH state overview
+src/pages/locations.astro               # all locations index
+src/pages/blog/index.astro              # blog index
+src/pages/blog/[slug].astro             # blog post
+src/pages/about.astro                   # about page
+src/pages/about/editorial-team.astro    # author page (E-E-A-T)
+src/pages/contact.astro
+src/pages/affiliate-disclosure.astro
+src/pages/privacy.astro
+src/pages/404.astro
+
+src/components/layout/                  # Nav.astro, Footer.astro
+src/components/common/                  # Breadcrumb, CTAButton, FAQAccordion, Badge, Eyebrow, Monogram, CookieBanner
+src/components/city/                    # CompanyCard, CompanyList, CTASidebar, CostSection, HowToChoose, NearbyCities
+src/components/hub/                     # ServiceHero, CityGrid, CostTable, WhenToHire
+src/components/blog/                    # BlogHeader, QuickAnswer, CTABox, AuthorBio
+src/components/schema/                  # OrganizationSchema, ServiceSchema, LocalBusinessSchema, FAQSchema, ArticleSchema
+src/components/seo/                     # SEOHead.astro
+src/styles/global.css                   # Tailwind v4 entry point
 ```
 
 ## Services (canonical slugs)
@@ -41,7 +66,9 @@ src/content/blog/                 # MDX blog posts
 
 ## Current Phase
 
-**Phase 1:** ME + NH, 40–50 cities, 4 services, ~320 city pages + service hubs + 8 blog posts.
+**Phase 1:** ME + NH, 40–50 cities, 4 active services, ~320 city pages + service hubs + 8 blog posts (1 written).
+Redesign complete. State landing pages built (`/maine`, `/new-hampshire`, `/[service]/maine`, `/[service]/new-hampshire`).
+Blog: `basement-waterproofing-cost-guide.mdx` done. 7 posts remaining (see `.claude/rules/content.md`).
 
 ## Rules by Domain
 

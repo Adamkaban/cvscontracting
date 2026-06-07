@@ -1,0 +1,73 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro'
+import Breadcrumb from '../../components/common/Breadcrumb.astro'
+import Eyebrow from '../../components/common/Eyebrow.astro'
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'CVS Contracting Editorial Team',
+  url: 'https://cvscontracting.com/about/editorial-team',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'CVS Contracting',
+    url: 'https://cvscontracting.com',
+  },
+  description:
+    'The CVS Contracting Editorial Team covers home improvement, contractor services, and cost guides for Maine and New Hampshire homeowners.',
+}
+---
+<SiteLayout
+  title="CVS Contracting Editorial Team"
+  description="The CVS Contracting Editorial Team covers contractor services, cost guides, and home improvement topics across Maine and New Hampshire."
+  canonicalUrl="/about/editorial-team"
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} slot="schema" />
+
+  <div class="container max-w-3xl py-16">
+    <Breadcrumb
+      items={[
+        { label: 'Home', href: '/' },
+        { label: 'About', href: '/about' },
+        { label: 'Editorial Team' },
+      ]}
+    />
+
+    <Eyebrow text="Author" />
+    <div class="mt-4 flex items-center gap-4">
+      <div class="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-blue-700 text-2xl font-bold text-white">
+        C
+      </div>
+      <div>
+        <h1 class="text-2xl md:text-3xl font-bold text-ink tracking-tight">
+          CVS Contracting Editorial Team
+        </h1>
+        <p class="text-sm text-gray-500 mt-1">Home improvement writers, Northeast US</p>
+      </div>
+    </div>
+
+    <div class="mt-8 space-y-4 text-gray-600 leading-relaxed">
+      <p>
+        The CVS Contracting Editorial Team produces cost guides, how-to articles, and
+        contractor comparison content for homeowners in Maine and New Hampshire.
+      </p>
+      <p>
+        All cost data referenced in our articles is sourced from HomeAdvisor, Angi, and
+        Thumbtack regional averages. Company listings are sourced from verified public
+        business data and are never fabricated.
+      </p>
+      <p>
+        Our editorial focus is transactional and local: helping Northeast homeowners make
+        informed decisions when hiring contractors for foundation repair, basement
+        waterproofing, excavation, and snow removal.
+      </p>
+    </div>
+
+    <section class="mt-10 border-t border-line pt-8">
+      <h2 class="text-xl font-semibold text-ink">Recent Articles</h2>
+      <p class="text-sm text-gray-500 mt-2">
+        <a href="/blog" class="text-blue-700 hover:underline">Browse all articles</a>
+      </p>
+    </section>
+  </div>
+</SiteLayout>

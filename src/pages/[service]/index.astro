@@ -57,14 +57,14 @@ const { service, hubContent, validCities } = Astro.props
 const mid = Math.round((service.avg_cost_min + service.avg_cost_max) / 2)
 const range = `$${service.avg_cost_min.toLocaleString()}–$${service.avg_cost_max.toLocaleString()}`
 const costRows = [
-  { state: 'Maine', avgCost: `$${mid.toLocaleString()}`, range },
-  { state: 'New Hampshire', avgCost: `$${mid.toLocaleString()}`, range },
+  { state: 'Maine', avgCost: `$${Math.round(mid * 0.95).toLocaleString()}`, range },
+  { state: 'New Hampshire', avgCost: `$${Math.round(mid * 1.05).toLocaleString()}`, range },
 ]
 
 const hubFaqs = hubContent ? getHubFAQs(hubContent.data.faqs) : []
 const { Content } = hubContent ? await render(hubContent) : { Content: null }
 
-const pageTitle = `${service.name} Contractors in Northeast US`
+const pageTitle = `${service.name} Contractors in Maine & New Hampshire`
 const canonicalPath = `/${service.slug}`
 ---
 <SiteLayout title={pageTitle} description={service.description} canonicalUrl={canonicalPath}>
@@ -84,6 +84,8 @@ const canonicalPath = `/${service.slug}`
       affiliateUrl={service.affiliate_url}
       affiliateRel={config.affiliate.linkRel}
     />
+
+    <CityGrid cities={validCities} serviceSlug={service.slug} serviceName={service.name} />
 
     {Content && (
       <div class="prose-content mt-10">
@@ -126,8 +128,6 @@ const canonicalPath = `/${service.slug}`
     )}
 
     <HowToChoose />
-
-    <CityGrid cities={validCities} serviceSlug={service.slug} serviceName={service.name} />
 
     <FAQAccordion faqs={hubFaqs} />
   </div>

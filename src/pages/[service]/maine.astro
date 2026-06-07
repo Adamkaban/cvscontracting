@@ -1,0 +1,104 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro'
+import Breadcrumb from '../../components/common/Breadcrumb.astro'
+import Eyebrow from '../../components/common/Eyebrow.astro'
+import FAQAccordion from '../../components/common/FAQAccordion.astro'
+import CityGrid from '../../components/hub/CityGrid.astro'
+import citiesData from '../../data/cities.json'
+import servicesData from '../../data/services.json'
+import type { CityEntry, ServiceEntry, CompanyEntry } from '../../types'
+
+export async function getStaticPaths() {
+  const cities = citiesData as CityEntry[]
+  const services = servicesData as ServiceEntry[]
+  const phase = parseInt(import.meta.env.PUBLIC_PHASE ?? '1')
+
+  const out = []
+  for (const service of services.filter((s) => s.priority <= phase)) {
+    const companies: CompanyEntry[] = await import(
+      `../../data/companies/${service.slug}.json`
+    )
+      .then((m) => m.default as CompanyEntry[])
+      .catch(() => [] as CompanyEntry[])
+
+    const validCities = cities
+      .filter((c) => c.state === 'Maine' && c.phase <= phase)
+      .filter(
+        (c) =>
+          companies.filter((co) => co.city_slug === c.slug && co.rating >= 3.5).length >= 3,
+      )
+
+    out.push({
+      params: { service: service.slug },
+      props: { service, validCities },
+    })
+  }
+  return out
+}
+
+const { service, validCities } = Astro.props
+
+const exampleCities = validCities.slice(0, 4).map((c) => c.name).join(', ')
+
+const faqs = [
+  {
+    question: `Where can I find ${service.name.toLowerCase()} contractors in Maine?`,
+    answer: `CVS Contracting lists verified ${service.name.toLowerCase()} contractors across ${validCities.length} Maine cities including ${exampleCities}. Select your city below to browse local companies with real ratings and contact info.`,
+  },
+  {
+    question: `How much does ${service.name.toLowerCase()} cost in Maine?`,
+    answer: `${service.name} in Maine typically costs between $${service.avg_cost_min.toLocaleString()} and $${service.avg_cost_max.toLocaleString()}, depending on project size, soil conditions, and site access. Get free quotes from local contractors to compare.`,
+  },
+  {
+    question: `Do ${service.name.toLowerCase()} contractors in Maine need to be licensed?`,
+    answer: `Maine requires contractors to hold appropriate licenses through the Maine Department of Professional and Financial Regulation. Always ask for proof of license and insurance before signing a contract.`,
+  },
+]
+---
+<SiteLayout
+  title={`${service.name} Contractors in Maine`}
+  description={`Find licensed ${service.name.toLowerCase()} contractors across Maine. Compare local companies, read reviews, and get free quotes. Avg cost: $${service.avg_cost_min.toLocaleString()}–$${service.avg_cost_max.toLocaleString()}.`}
+  canonicalUrl={`/${service.slug}/maine`}
+>
+  <div class="container max-w-4xl py-16">
+    <Breadcrumb
+      items={[
+        { label: 'Home', href: '/' },
+        { label: service.name, href: `/${service.slug}` },
+        { label: 'Maine' },
+      ]}
+    />
+
+    <Eyebrow text="Maine" />
+    <h1 class="text-3xl md:text-4xl font-bold text-ink tracking-tight mt-2">
+      {service.name} Contractors in Maine
+    </h1>
+    <p class="text-base text-gray-600 leading-relaxed mt-4 max-w-2xl">
+      Find licensed {service.name.toLowerCase()} contractors across Maine. CVS Contracting
+      lists verified local businesses in {validCities.length} Maine cities — with real
+      ratings, review counts, and direct contact info so you can compare and hire with confidence.
+    </p>
+
+    <CityGrid
+      cities={validCities}
+      serviceSlug={service.slug}
+      serviceName={service.name}
+      groupByState={false}
+    />
+
+    <section class="mt-10">
+      <h2 class="text-2xl font-semibold text-ink tracking-tight">
+        Average Cost of {service.name} in Maine
+      </h2>
+      <p class="text-gray-600 mt-2">
+        Maine homeowners typically pay between{' '}
+        <strong>${service.avg_cost_min.toLocaleString()}</strong> and{' '}
+        <strong>${service.avg_cost_max.toLocaleString()}</strong> for {service.name.toLowerCase()}.
+        Final cost depends on project scope, site conditions, and contractor rates in your area.
+        Source: HomeAdvisor and Angi regional averages.
+      </p>
+    </section>
+
+    <FAQAccordion faqs={faqs} />
+  </div>
+</SiteLayout>
