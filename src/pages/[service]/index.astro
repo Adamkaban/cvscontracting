@@ -8,7 +8,6 @@ import type { CityEntry, ServiceEntry, CompanyEntry } from '../../types'
 
 import Breadcrumb from '../../components/common/Breadcrumb.astro'
 import ServiceHero from '../../components/hub/ServiceHero.astro'
-import CostTable from '../../components/hub/CostTable.astro'
 import WhenToHire from '../../components/hub/WhenToHire.astro'
 import CityGrid from '../../components/hub/CityGrid.astro'
 import HowToChoose from '../../components/city/HowToChoose.astro'
@@ -32,7 +31,6 @@ export async function getStaticPaths() {
       .then((m) => m.default as CompanyEntry[])
       .catch(() => [] as CompanyEntry[])
 
-    // Cities that have a published page for this service (>=3 companies, in phase).
     const validCities = cities
       .filter((c) => c.phase <= phase)
       .filter(
@@ -54,20 +52,14 @@ export async function getStaticPaths() {
 
 const { service, hubContent, validCities } = Astro.props
 
-const mid = Math.round((service.avg_cost_min + service.avg_cost_max) / 2)
-const range = `$${service.avg_cost_min.toLocaleString()}–$${service.avg_cost_max.toLocaleString()}`
-const costRows = [
-  { state: 'Maine', avgCost: `$${Math.round(mid * 0.95).toLocaleString()}`, range },
-  { state: 'New Hampshire', avgCost: `$${Math.round(mid * 1.05).toLocaleString()}`, range },
-]
-
 const hubFaqs = hubContent ? getHubFAQs(hubContent.data.faqs) : []
 const { Content } = hubContent ? await render(hubContent) : { Content: null }
 
-const pageTitle = `${service.name} Contractors in Maine & New Hampshire`
+const pageTitle = service.pageTitle ?? `${service.name} Contractors in Maine & New Hampshire`
+const metaDescription = service.metaDescription ?? service.description
 const canonicalPath = `/${service.slug}`
 ---
-<SiteLayout title={pageTitle} description={service.description} canonicalUrl={canonicalPath}>
+<SiteLayout title={pageTitle} description={metaDescription} canonicalUrl={canonicalPath}>
   <Fragment slot="schema">
     <ServiceSchema serviceName={service.name} />
     <FAQSchema faqs={hubFaqs} />
@@ -83,7 +75,14 @@ const canonicalPath = `/${service.slug}`
       costMax={service.avg_cost_max}
       affiliateUrl={service.affiliate_url}
       affiliateRel={config.affiliate.linkRel}
+      geoLabel="Maine and New Hampshire"
     />
+
+    {hubContent?.data.introText && (
+      <p class="text-gray-600 leading-relaxed mt-6 mb-2 max-w-2xl">
+        {hubContent.data.introText}
+      </p>
+    )}
 
     <CityGrid cities={validCities} serviceSlug={service.slug} serviceName={service.name} />
 
@@ -105,20 +104,6 @@ const canonicalPath = `/${service.slug}`
       </section>
     )}
 
-    <section class="mt-10">
-      <h2 class="text-2xl font-semibold text-ink tracking-tight">
-        Average Cost of {service.name}
-      </h2>
-      <p class="text-gray-600 mt-2 mb-4">
-        Regional averages for {service.name.toLowerCase()} across Maine and New Hampshire.
-      </p>
-      <CostTable rows={costRows} />
-      <p class="text-xs text-gray-500 mt-3">
-        Cost data sourced from HomeAdvisor and Angi regional averages. Average reflects the
-        midpoint of typical project ranges.
-      </p>
-    </section>
-
     {hubContent && (
       <WhenToHire
         serviceName={service.name}
@@ -127,8 +112,8 @@ const canonicalPath = `/${service.slug}`
       />
     )}
 
-    <HowToChoose />
-
     <FAQAccordion faqs={hubFaqs} />
+
+    <HowToChoose />
   </div>
 </SiteLayout>
