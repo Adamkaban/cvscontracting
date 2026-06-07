@@ -31,15 +31,12 @@ const schema = {
   author: {
     '@type': 'Person',
     name: author,
+    url: siteUrl + '/about/editorial-team',
+    '@id': siteUrl + '/about/editorial-team#author',
   },
   publisher: {
     '@type': 'Organization',
-    name: config.brand.name,
-    url: siteUrl,
-    logo: {
-      '@type': 'ImageObject',
-      url: siteUrl + config.brand.logo,
-    },
+    '@id': siteUrl + '/#organization',
   },
   mainEntityOfPage: {
     '@type': 'WebPage',

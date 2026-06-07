@@ -22,8 +22,7 @@ const schema = {
   areaServed,
   provider: {
     '@type': 'Organization',
-    name: config.brand.name,
-    url: siteUrl,
+    '@id': siteUrl + '/#organization',
   },
 }
 ---

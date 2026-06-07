@@ -12,6 +12,7 @@ const siteUrl = (import.meta.env.SITE_URL ?? config.seo.siteUrl).replace(/\/$/, 
 const graph: object[] = [
   {
     '@type': 'Organization',
+    '@id': siteUrl + '/#organization',
     name: config.brand.name,
     url: siteUrl,
     logo: siteUrl + config.brand.logo,
@@ -19,6 +20,7 @@ const graph: object[] = [
   },
   {
     '@type': 'WebSite',
+    '@id': siteUrl + '/#website',
     url: siteUrl,
     name: config.brand.name,
   },
