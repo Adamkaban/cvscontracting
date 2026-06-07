@@ -55,7 +55,7 @@ const { service, hubContent, validCities } = Astro.props
 const hubFaqs = hubContent ? getHubFAQs(hubContent.data.faqs) : []
 const { Content } = hubContent ? await render(hubContent) : { Content: null }
 
-const pageTitle = service.pageTitle ?? `${service.name} Contractors in Maine & New Hampshire`
+const pageTitle = service.pageTitle ?? `${service.name} Contractors in Northeast US`
 const metaDescription = service.metaDescription ?? service.description
 const canonicalPath = `/${service.slug}`
 ---
@@ -75,7 +75,7 @@ const canonicalPath = `/${service.slug}`
       costMax={service.avg_cost_max}
       affiliateUrl={service.affiliate_url}
       affiliateRel={config.affiliate.linkRel}
-      geoLabel="Maine and New Hampshire"
+      geoLabel="Northeast US"
     />
 
     {hubContent?.data.introText && (
