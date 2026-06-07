@@ -2,79 +2,227 @@
 import SiteLayout from '../layouts/SiteLayout.astro'
 import Breadcrumb from '../components/common/Breadcrumb.astro'
 import Eyebrow from '../components/common/Eyebrow.astro'
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'David Campbell',
+  jobTitle: 'Founder',
+  url: 'https://cvscontracting.com/about/editorial-team',
+  image: 'https://cvscontracting.com/author.webp',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'CVS Contracting',
+    url: 'https://cvscontracting.com',
+  },
+  description:
+    'David Campbell is the founder of CVS Contracting and has spent years researching the Northeast US contractor market, helping Maine and New Hampshire homeowners find licensed local contractors.',
+}
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How does CVS Contracting vet contractors?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'We source all contractor listings from verified public business data. Each listing displays real Google ratings and review counts. We never fabricate ratings, contact details, or reviews. Listings are filtered to show only businesses with a rating of 3.5 or higher and at least 3 verified reviews.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does CVS Contracting employ the contractors?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. CVS Contracting is an independent directory and referral service. We connect homeowners with local contractors but do not employ, endorse, or guarantee the work of any listed company. Always verify licensing and insurance directly with the contractor.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How are cost estimates on the site sourced?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'All cost ranges are sourced from HomeAdvisor, Angi, and Thumbtack regional data for Maine and New Hampshire. We update figures regularly and always cite the source so you can verify independently.',
+      },
+    },
+  ],
+}
 ---
 <SiteLayout
-  title="About CVS Contracting"
-  description="CVS Contracting helps Maine and New Hampshire homeowners find licensed, reviewed local contractors for foundation repair, waterproofing, excavation, and snow removal."
+  title="About CVS Contracting | David Campbell, Founder"
+  description="CVS Contracting helps Maine and New Hampshire homeowners find licensed local contractors. Learn about our founder David Campbell and how we vet contractor listings."
   canonicalUrl="/about"
 >
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(personSchema)} slot="schema" />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} slot="schema" />
+
   <div class="container max-w-3xl py-16">
     <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'About' }]} />
 
-    <Eyebrow text="About Us" />
-    <h1 class="text-3xl md:text-4xl font-bold text-ink tracking-tight mt-2">
-      About CVS Contracting
-    </h1>
-
-    <div class="mt-8 space-y-6 text-gray-600 leading-relaxed">
-      <p>
-        CVS Contracting is a contractor directory and referral service connecting homeowners
-        across Maine and New Hampshire with licensed, vetted local businesses for foundation
-        repair, basement waterproofing, excavation, and snow removal.
-      </p>
-
-      <p>
-        Every listing in our directory is sourced from verified public business data.
-        We display real ratings and review counts so you can make an informed decision
-        before reaching out to a contractor.
-      </p>
+    <!-- Founder intro -->
+    <div class="mt-6 flex flex-col sm:flex-row items-start gap-8">
+      <div class="shrink-0">
+        <img
+          src="/author.webp"
+          alt="David Campbell, founder of CVS Contracting"
+          width="120"
+          height="120"
+          class="rounded-full object-cover w-[120px] h-[120px] border-4 border-white shadow-md ring-1 ring-gray-200"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+      <div>
+        <Eyebrow text="About Us" />
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight mt-2">
+          About CVS Contracting
+        </h1>
+        <p class="text-gray-600 mt-3 leading-relaxed">
+          Founded by <a href="/about/editorial-team" class="text-blue-700 hover:underline font-medium">David Campbell</a>, CVS Contracting is a contractor directory connecting homeowners across Maine and New Hampshire with licensed local businesses for foundation repair, basement waterproofing, excavation, and snow removal.
+        </p>
+        <p class="text-sm text-gray-500 mt-2">
+          David Campbell &mdash; Founder, CVS Contracting
+        </p>
+      </div>
     </div>
 
+    <!-- Mission -->
     <section class="mt-12">
-      <h2 class="text-2xl font-semibold text-ink tracking-tight">How It Works</h2>
-      <ol class="mt-4 space-y-3 text-gray-600">
-        <li class="flex gap-3">
-          <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-700 text-xs font-bold text-white">1</span>
-          <span>Search for your service and city — browse contractor listings with ratings, reviews, and contact info.</span>
+      <h2 class="text-2xl font-semibold text-gray-900 tracking-tight">Our Mission</h2>
+      <div class="mt-4 space-y-4 text-gray-600 leading-relaxed">
+        <p>
+          Finding a trustworthy contractor in rural Maine or New Hampshire is harder than it should be. National lead-gen platforms flood inboxes with out-of-state referrals. Local word-of-mouth works, but not everyone has it.
+        </p>
+        <p>
+          CVS Contracting was built to close that gap: a directory of real, rated local contractors, organized by service and city, with transparent cost data so you know what a fair price looks like before you call anyone.
+        </p>
+      </div>
+    </section>
+
+    <!-- How we vet -->
+    <section class="mt-12">
+      <h2 class="text-2xl font-semibold text-gray-900 tracking-tight">How We Vet Listings</h2>
+      <div class="mt-4 space-y-3 text-gray-600 leading-relaxed">
+        <p>Every listing in our directory goes through the same process:</p>
+        <ul class="mt-3 space-y-2 list-none">
+          <li class="flex items-start gap-3">
+            <span class="mt-1 h-2 w-2 rounded-full bg-blue-700 shrink-0"></span>
+            <span><strong class="text-gray-900">Real business data only.</strong> Listings are sourced from verified public business records. We never fabricate names, addresses, or contact details.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-1 h-2 w-2 rounded-full bg-blue-700 shrink-0"></span>
+            <span><strong class="text-gray-900">Ratings threshold.</strong> Only businesses with a Google rating of 3.5 or higher and at least 3 verified reviews are included. No reviews, no listing.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-1 h-2 w-2 rounded-full bg-blue-700 shrink-0"></span>
+            <span><strong class="text-gray-900">Transparent cost data.</strong> All cost ranges are sourced from HomeAdvisor, Angi, and Thumbtack regional data for ME and NH and cited by source on every page.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-1 h-2 w-2 rounded-full bg-blue-700 shrink-0"></span>
+            <span><strong class="text-gray-900">No paid placement.</strong> Listing order reflects ratings and review count, not ad spend. Affiliate links are disclosed on every page and in our <a href="/affiliate-disclosure" class="text-blue-700 hover:underline">affiliate disclosure</a>.</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="mt-12">
+      <h2 class="text-2xl font-semibold text-gray-900 tracking-tight">How It Works</h2>
+      <ol class="mt-4 space-y-4">
+        <li class="flex gap-4">
+          <span class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-700 text-sm font-bold text-white">1</span>
+          <div>
+            <p class="font-medium text-gray-900">Search by service and city</p>
+            <p class="text-gray-600 text-sm mt-0.5">Browse contractor listings with real ratings, review counts, addresses, and phone numbers for your specific city in Maine or New Hampshire.</p>
+          </div>
         </li>
-        <li class="flex gap-3">
-          <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-700 text-xs font-bold text-white">2</span>
-          <span>Click "Get Free Quotes" to request estimates from multiple contractors through our affiliate partners.</span>
+        <li class="flex gap-4">
+          <span class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-700 text-sm font-bold text-white">2</span>
+          <div>
+            <p class="font-medium text-gray-900">Request free quotes</p>
+            <p class="text-gray-600 text-sm mt-0.5">Click "Get Free Quotes" to request estimates from multiple local contractors through our affiliate partners Angi and HomeAdvisor.</p>
+          </div>
         </li>
-        <li class="flex gap-3">
-          <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-700 text-xs font-bold text-white">3</span>
-          <span>Compare quotes, check references, and hire the contractor that fits your project and budget.</span>
+        <li class="flex gap-4">
+          <span class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-700 text-sm font-bold text-white">3</span>
+          <div>
+            <p class="font-medium text-gray-900">Compare and hire</p>
+            <p class="text-gray-600 text-sm mt-0.5">Compare quotes against the cost ranges we publish, check references, and hire the contractor that fits your project and budget. We recommend getting at least 3 written estimates.</p>
+          </div>
         </li>
       </ol>
     </section>
 
+    <!-- Editorial standards -->
     <section class="mt-12">
-      <h2 class="text-2xl font-semibold text-ink tracking-tight">Our Editorial Team</h2>
-      <div class="mt-4 flex items-start gap-4 rounded-xl border border-line bg-gray-50 p-5">
-        <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-blue-700 text-lg font-bold text-white">
-          C
-        </div>
-        <div>
-          <p class="font-semibold text-ink">CVS Contracting Editorial Team</p>
-          <p class="text-sm text-gray-500 mt-0.5">Home improvement writers covering the Northeast US</p>
-          <p class="text-sm text-gray-600 mt-2">
-            Our editorial team researches contractor services, cost data, and home improvement
-            topics across Maine and New Hampshire. Cost figures are sourced from HomeAdvisor,
-            Angi, and Thumbtack regional data.
-          </p>
-          <a href="/about/editorial-team" class="text-sm text-blue-700 hover:underline mt-2 inline-block">
-            View author profile
-          </a>
-        </div>
+      <h2 class="text-2xl font-semibold text-gray-900 tracking-tight">Editorial Standards</h2>
+      <div class="mt-4 space-y-4 text-gray-600 leading-relaxed">
+        <p>
+          Our cost guides and how-to content are written and reviewed by David Campbell and the CVS Contracting editorial team. Cost figures are cross-referenced against at least two sources (HomeAdvisor, Angi, or Thumbtack) before publication and updated when regional data changes.
+        </p>
+        <p>
+          We do not publish specific licensing or certification claims about individual contractors without verified information. We do not fabricate statistics. If we cite a number, we name the source.
+        </p>
+        <p>
+          <a href="/about/editorial-team" class="text-blue-700 hover:underline">View the full author profile for David Campbell</a> including editorial background and areas of coverage.
+        </p>
       </div>
     </section>
 
+    <!-- FAQ -->
     <section class="mt-12">
-      <h2 class="text-2xl font-semibold text-ink tracking-tight">Contact & Questions</h2>
+      <h2 class="text-2xl font-semibold text-gray-900 tracking-tight">Frequently Asked Questions</h2>
+      <div class="mt-4 space-y-4">
+        <details class="border-t border-gray-200 pt-4">
+          <summary class="cursor-pointer font-medium text-gray-900 hover:text-blue-700 flex items-center justify-between list-none">
+            How does CVS Contracting vet contractors?
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256" class="text-gray-400 shrink-0 ml-2 details-open:rotate-180 transition-transform">
+              <path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/>
+            </svg>
+          </summary>
+          <p class="text-gray-600 mt-2 pb-4 leading-relaxed text-sm">
+            All listings are sourced from verified public business data. Each company must have a Google rating of 3.5 or higher and at least 3 verified reviews to appear on the site. We never fabricate ratings, reviews, or contact details. Affiliate links are clearly disclosed.
+          </p>
+        </details>
+        <details class="border-t border-gray-200 pt-4">
+          <summary class="cursor-pointer font-medium text-gray-900 hover:text-blue-700 flex items-center justify-between list-none">
+            Does CVS Contracting employ the contractors listed?
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256" class="text-gray-400 shrink-0 ml-2 transition-transform">
+              <path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/>
+            </svg>
+          </summary>
+          <p class="text-gray-600 mt-2 pb-4 leading-relaxed text-sm">
+            No. CVS Contracting is an independent directory and referral service. We do not employ, endorse, or guarantee the work of any listed contractor. Always verify licensing, insurance, and references directly with the contractor before hiring.
+          </p>
+        </details>
+        <details class="border-t border-b border-gray-200 pt-4">
+          <summary class="cursor-pointer font-medium text-gray-900 hover:text-blue-700 flex items-center justify-between list-none">
+            Where do cost estimates come from?
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256" class="text-gray-400 shrink-0 ml-2 transition-transform">
+              <path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/>
+            </svg>
+          </summary>
+          <p class="text-gray-600 mt-2 pb-4 leading-relaxed text-sm">
+            All cost ranges are sourced from HomeAdvisor, Angi, and Thumbtack regional averages for Maine and New Hampshire. The source is cited on every cost section. These are estimates: actual prices vary by project size, soil type, access, and contractor.
+          </p>
+        </details>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="mt-12">
+      <h2 class="text-2xl font-semibold text-gray-900 tracking-tight">Contact</h2>
       <p class="text-gray-600 mt-2">
-        Have a question or feedback? <a href="/contact" class="text-blue-700 hover:underline">Use our contact form</a>.
-        For affiliate and partnership inquiries, see our <a href="/affiliate-disclosure" class="text-blue-700 hover:underline">affiliate disclosure</a>.
+        Questions or feedback: <a href="/contact" class="text-blue-700 hover:underline">use our contact form</a>. For affiliate and partnership inquiries, see our <a href="/affiliate-disclosure" class="text-blue-700 hover:underline">affiliate disclosure</a>.
       </p>
     </section>
   </div>
 </SiteLayout>
+
+<style>
+  details[open] summary svg {
+    transform: rotate(180deg);
+  }
+</style>

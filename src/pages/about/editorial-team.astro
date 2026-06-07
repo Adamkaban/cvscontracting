@@ -6,20 +6,29 @@ import Eyebrow from '../../components/common/Eyebrow.astro'
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: 'CVS Contracting Editorial Team',
+  name: 'David Campbell',
+  jobTitle: 'Founder',
   url: 'https://cvscontracting.com/about/editorial-team',
+  image: 'https://cvscontracting.com/author.webp',
   worksFor: {
     '@type': 'Organization',
     name: 'CVS Contracting',
     url: 'https://cvscontracting.com',
   },
+  knowsAbout: [
+    'Basement waterproofing',
+    'Foundation repair',
+    'Excavation contractors',
+    'Snow removal',
+    'Home improvement costs in Maine and New Hampshire',
+  ],
   description:
-    'The CVS Contracting Editorial Team covers home improvement, contractor services, and cost guides for Maine and New Hampshire homeowners.',
+    'David Campbell is the founder of CVS Contracting and lead researcher covering contractor services, home improvement costs, and local contractor markets across Maine and New Hampshire.',
 }
 ---
 <SiteLayout
-  title="CVS Contracting Editorial Team"
-  description="The CVS Contracting Editorial Team covers contractor services, cost guides, and home improvement topics across Maine and New Hampshire."
+  title="David Campbell, Founder | CVS Contracting"
+  description="David Campbell is the founder of CVS Contracting, covering contractor services and home improvement costs across Maine and New Hampshire since 2023."
   canonicalUrl="/about/editorial-team"
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} slot="schema" />
@@ -29,44 +38,102 @@ const schema = {
       items={[
         { label: 'Home', href: '/' },
         { label: 'About', href: '/about' },
-        { label: 'Editorial Team' },
+        { label: 'David Campbell' },
       ]}
     />
 
     <Eyebrow text="Author" />
-    <div class="mt-4 flex items-center gap-4">
-      <div class="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-blue-700 text-2xl font-bold text-white">
-        C
+
+    <!-- Author header -->
+    <div class="mt-4 flex flex-col sm:flex-row items-start gap-6">
+      <div class="shrink-0">
+        <img
+          src="/author.webp"
+          alt="David Campbell, founder of CVS Contracting"
+          width="128"
+          height="128"
+          class="rounded-full object-cover w-[128px] h-[128px] border-4 border-white shadow-md ring-1 ring-gray-200"
+          loading="eager"
+          decoding="async"
+        />
       </div>
       <div>
-        <h1 class="text-2xl md:text-3xl font-bold text-ink tracking-tight">
-          CVS Contracting Editorial Team
+        <h1 class="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">
+          David Campbell
         </h1>
-        <p class="text-sm text-gray-500 mt-1">Home improvement writers, Northeast US</p>
+        <p class="text-gray-500 mt-1">Founder, CVS Contracting</p>
+        <p class="text-sm text-gray-500 mt-1">Covering Northeast US contractor markets since 2023</p>
       </div>
     </div>
 
+    <!-- Bio -->
     <div class="mt-8 space-y-4 text-gray-600 leading-relaxed">
       <p>
-        The CVS Contracting Editorial Team produces cost guides, how-to articles, and
-        contractor comparison content for homeowners in Maine and New Hampshire.
+        David Campbell founded CVS Contracting to solve a problem he kept running into: finding a licensed, reviewed local contractor in Maine or New Hampshire requires wading through national lead-gen platforms that rarely deliver local results. CVS Contracting was built to make that search faster, more transparent, and grounded in real local data.
       </p>
       <p>
-        All cost data referenced in our articles is sourced from HomeAdvisor, Angi, and
-        Thumbtack regional averages. Company listings are sourced from verified public
-        business data and are never fabricated.
+        David researches contractor costs, vetting methodology, and home improvement topics specific to the Northeast US. All cost data published on the site is cross-referenced against at least two of HomeAdvisor, Angi, and Thumbtack before publication. Company listings are sourced from verified public business records and filtered by rating and review count.
       </p>
       <p>
-        Our editorial focus is transactional and local: helping Northeast homeowners make
-        informed decisions when hiring contractors for foundation repair, basement
-        waterproofing, excavation, and snow removal.
+        His editorial focus is practical and transactional: cost ranges for real projects, what to ask before hiring, and how to compare contractors in a market where licensing requirements differ by state and county.
       </p>
     </div>
 
-    <section class="mt-10 border-t border-line pt-8">
-      <h2 class="text-xl font-semibold text-ink">Recent Articles</h2>
+    <!-- Coverage areas -->
+    <section class="mt-10">
+      <h2 class="text-xl font-semibold text-gray-900 tracking-tight">Areas of Coverage</h2>
+      <ul class="mt-3 space-y-1.5 text-gray-600">
+        <li class="flex items-start gap-2">
+          <span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-blue-700 shrink-0"></span>
+          <span><a href="/basement-waterproofing" class="text-blue-700 hover:underline">Basement waterproofing</a> in Maine and New Hampshire</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-blue-700 shrink-0"></span>
+          <span><a href="/foundation-repair" class="text-blue-700 hover:underline">Foundation repair</a> costs and contractor selection</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-blue-700 shrink-0"></span>
+          <span><a href="/excavation-contractors" class="text-blue-700 hover:underline">Excavation contractors</a> for site prep, utilities, and drainage</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-blue-700 shrink-0"></span>
+          <span><a href="/snow-removal" class="text-blue-700 hover:underline">Snow removal</a> pricing: per-visit vs seasonal contracts</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Editorial methodology -->
+    <section class="mt-10 rounded-xl border border-gray-200 bg-gray-50 p-6">
+      <h2 class="text-lg font-semibold text-gray-900">Editorial Methodology</h2>
+      <ul class="mt-3 space-y-2 text-sm text-gray-600">
+        <li class="flex items-start gap-2">
+          <span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-green-700 shrink-0"></span>
+          <span>Cost figures cross-referenced against HomeAdvisor, Angi, and Thumbtack regional data for ME and NH</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-green-700 shrink-0"></span>
+          <span>Company listings sourced from verified public business records only, never fabricated</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-green-700 shrink-0"></span>
+          <span>Listings filtered to rating 3.5+ and a minimum of 3 verified reviews</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-green-700 shrink-0"></span>
+          <span>No specific licensing claims published without verified source</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-green-700 shrink-0"></span>
+          <span>Affiliate relationships disclosed on every page and in our <a href="/affiliate-disclosure" class="text-blue-700 hover:underline">affiliate disclosure</a></span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Recent articles -->
+    <section class="mt-10 border-t border-gray-200 pt-8">
+      <h2 class="text-xl font-semibold text-gray-900">Recent Articles</h2>
       <p class="text-sm text-gray-500 mt-2">
-        <a href="/blog" class="text-blue-700 hover:underline">Browse all articles</a>
+        <a href="/blog" class="text-blue-700 hover:underline">Browse all articles by David Campbell</a>
       </p>
     </section>
   </div>
