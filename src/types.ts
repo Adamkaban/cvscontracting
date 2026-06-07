@@ -23,6 +23,8 @@ export interface ServiceEntry {
   affiliate_url: string
   priority: 1 | 2
   keywords: string[]
+  pageTitle?: string
+  metaDescription?: string
 }
 
 export interface CompanyEntry {
