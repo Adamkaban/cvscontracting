@@ -1,0 +1,24 @@
+# Service hub trailing-slash → no-slash
+/basement-waterproofing/         /basement-waterproofing         301
+/foundation-repair/              /foundation-repair              301
+/snow-removal/                   /snow-removal                   301
+/excavation-contractors/         /excavation-contractors         301
+
+# State landing page trailing-slash → no-slash
+/basement-waterproofing/maine/           /basement-waterproofing/maine           301
+/foundation-repair/maine/                /foundation-repair/maine                301
+/snow-removal/maine/                     /snow-removal/maine                     301
+/excavation-contractors/maine/           /excavation-contractors/maine           301
+/basement-waterproofing/new-hampshire/   /basement-waterproofing/new-hampshire   301
+/foundation-repair/new-hampshire/        /foundation-repair/new-hampshire        301
+/snow-removal/new-hampshire/             /snow-removal/new-hampshire             301
+/excavation-contractors/new-hampshire/   /excavation-contractors/new-hampshire   301
+
+# City pages trailing-slash → no-slash
+/basement-waterproofing/:city/   /basement-waterproofing/:city   301
+/foundation-repair/:city/        /foundation-repair/:city        301
+/snow-removal/:city/             /snow-removal/:city             301
+/excavation-contractors/:city/   /excavation-contractors/:city   301
+
+# Blog trailing-slash → no-slash
+/blog/:slug/   /blog/:slug   301
