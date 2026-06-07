@@ -55,8 +55,12 @@ export async function getStaticPaths() {
     // First pass: which cities qualify (>=3 companies, rating >= 3.5, in phase).
     const qualifying: Array<{ city: CityEntry; companies: CompanyEntry[] }> = []
     for (const city of cities.filter((c) => c.phase <= phase)) {
+      const minReviews = city.population < 10000 ? 1 : 3
       const cityCompanies = companies.filter(
-        (co) => co.city_slug === city.slug && co.rating >= 3.5,
+        (co) =>
+          co.city_slug === city.slug &&
+          co.rating >= 3.5 &&
+          co.review_count >= minReviews,
       )
       if (cityCompanies.length < 3) continue // data.md: skip pages with <3 companies
       qualifying.push({ city, companies: cityCompanies })

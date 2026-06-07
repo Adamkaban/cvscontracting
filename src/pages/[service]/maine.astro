@@ -25,10 +25,14 @@ export async function getStaticPaths() {
 
     const validCities = cities
       .filter((c) => c.state === 'Maine' && c.phase <= phase)
-      .filter(
-        (c) =>
-          companies.filter((co) => co.city_slug === c.slug && co.rating >= 3.5).length >= 3,
-      )
+      .filter((c) => {
+        const minReviews = c.population < 10000 ? 1 : 3
+        return (
+          companies.filter(
+            (co) => co.city_slug === c.slug && co.rating >= 3.5 && co.review_count >= minReviews,
+          ).length >= 3
+        )
+      })
 
     out.push({
       params: { service: service.slug },
