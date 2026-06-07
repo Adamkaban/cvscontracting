@@ -15,6 +15,10 @@ export default defineConfig({
         !page.includes('/affiliate-disclosure') &&
         !page.includes('/claim') &&
         !page.includes('/404'),
+      serialize(item) {
+        item.lastmod = new Date().toISOString().split('T')[0]
+        return item
+      },
     }),
   ],
   vite: {
