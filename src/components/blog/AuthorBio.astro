@@ -5,9 +5,30 @@ interface Props {
 
 const { author } = Astro.props
 ---
-<div class="rounded-xl border border-line bg-white p-5 mt-10">
-  <p class="text-sm text-gray-600">
-    <span class="font-semibold text-ink">{author}</span> covers home improvement and
-    contractor services across Northeast USA.
-  </p>
+<div class="mt-10 rounded-xl border border-gray-200 bg-gray-50 p-6">
+  <div class="flex items-start gap-4">
+    <div class="shrink-0">
+      <a href="/about/editorial-team">
+        <img
+          src="/author.webp"
+          alt={`${author}, founder of CVS Contracting`}
+          width="64"
+          height="64"
+          class="rounded-full object-cover w-16 h-16 ring-1 ring-gray-200"
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
+    </div>
+    <div>
+      <p class="text-xs text-gray-500 uppercase tracking-wide font-medium mb-1">Written by</p>
+      <a href="/about/editorial-team" class="text-base font-semibold text-gray-900 hover:text-blue-700">
+        {author}
+      </a>
+      <p class="text-sm text-gray-600 mt-1 leading-relaxed">
+        Founder of CVS Contracting. Covers contractor costs and vetting methodology across Maine and New Hampshire.
+        Cost data is cross-referenced against HomeAdvisor, Angi, and Thumbtack before publication.
+      </p>
+    </div>
+  </div>
 </div>
