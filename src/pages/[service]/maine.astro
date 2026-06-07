@@ -4,6 +4,8 @@ import Breadcrumb from '../../components/common/Breadcrumb.astro'
 import Eyebrow from '../../components/common/Eyebrow.astro'
 import FAQAccordion from '../../components/common/FAQAccordion.astro'
 import CityGrid from '../../components/hub/CityGrid.astro'
+import ServiceSchema from '../../components/schema/ServiceSchema.astro'
+import FAQSchema from '../../components/schema/FAQSchema.astro'
 import citiesData from '../../data/cities.json'
 import servicesData from '../../data/services.json'
 import type { CityEntry, ServiceEntry, CompanyEntry } from '../../types'
@@ -60,6 +62,10 @@ const faqs = [
   description={`Find licensed ${service.name.toLowerCase()} contractors across Maine. Compare local companies, read reviews, and get free quotes. Avg cost: $${service.avg_cost_min.toLocaleString()}–$${service.avg_cost_max.toLocaleString()}.`}
   canonicalUrl={`/${service.slug}/maine`}
 >
+  <Fragment slot="schema">
+    <ServiceSchema serviceName={service.name} cityName="Maine" stateAbbr="ME" />
+    <FAQSchema faqs={faqs} />
+  </Fragment>
   <div class="container max-w-4xl py-16">
     <Breadcrumb
       items={[
