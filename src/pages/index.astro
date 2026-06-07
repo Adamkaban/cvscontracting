@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content'
+import { Fragment } from 'astro'
 import SiteLayout from '../layouts/SiteLayout.astro'
 import OrganizationSchema from '../components/schema/OrganizationSchema.astro'
 import Eyebrow from '../components/common/Eyebrow.astro'
@@ -74,7 +75,14 @@ const homeFaqs = [
   title="Contractor Services in Maine & Northeast US"
   description="Find trusted foundation repair, basement waterproofing, excavation, and snow removal contractors in Maine and New Hampshire. Compare local companies, get free quotes. Avg cost: $300–$15,000."
 >
-  <OrganizationSchema slot="schema" faqs={homeFaqs} />
+  <Fragment slot="schema">
+    <OrganizationSchema faqs={homeFaqs} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: config.seo.siteUrl.replace(/\/$/, '') }]
+    })} />
+  </Fragment>
 
   <!-- HERO -->
   <section class="border-b border-line">
