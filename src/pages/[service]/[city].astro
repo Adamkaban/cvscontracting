@@ -91,8 +91,26 @@ const { service, city, companies, hubFaqs, validCitySlugs, allCities } = Astro.p
 const intro = generateCityIntro(city, service)
 const faqs = getCityServiceFAQs(city.name, hubFaqs)
 
-const pageTitle = `${service.name} in ${city.name}, ${city.state_abbr}`
-const description = `Find ${service.name.toLowerCase()} contractors in ${city.name}, ${city.state_abbr}. Compare local companies, read reviews, get free quotes. Avg cost: $${service.avg_cost_min.toLocaleString()}–$${service.avg_cost_max.toLocaleString()}.`
+const pageTitle = `${service.name} in ${city.name}, ${city.state_abbr} | Top ${companies.length} Contractors`
+
+function pickVariant(citySlug: string, serviceSlug: string, count: number): number {
+  let hash = 0
+  for (const c of citySlug + serviceSlug) hash = (hash * 31 + c.charCodeAt(0)) & 0xffff
+  return hash % count
+}
+
+const variants = service.description_variants
+const description = variants && variants.length > 0
+  ? variants[pickVariant(city.slug, service.slug, variants.length)]
+      .replace('{city}', city.name)
+      .replace('{state}', city.state_abbr)
+      .replace('{county}', city.county)
+      .replace('{n}', String(companies.length))
+      .replace('{min}', service.avg_cost_min.toLocaleString())
+      .replace('{max}', service.avg_cost_max.toLocaleString())
+      .slice(0, 155)
+  : `Find ${service.name.toLowerCase()} contractors in ${city.name}, ${city.state_abbr}. Compare local companies, read reviews, get free quotes. Avg cost: $${service.avg_cost_min.toLocaleString()}–$${service.avg_cost_max.toLocaleString()}.`
+
 const canonicalPath = `/${service.slug}/${city.slug}`
 ---
 <SiteLayout title={pageTitle} description={description} canonicalUrl={canonicalPath}>

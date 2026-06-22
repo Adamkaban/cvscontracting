@@ -15,7 +15,25 @@
       "foundation repair",
       "foundation contractor",
       "foundation crack repair",
-      "foundation problems"
+      "foundation problems",
+      "foundation repairs near me",
+      "foundation repair cost",
+      "foundation crack repair cost",
+      "foundation repair near me free estimate",
+      "residential foundation repair",
+      "structural foundation repair near me",
+      "cinder block foundation repair cost"
+    ],
+    "keywords_lsi": [
+      "helical piers", "push piers", "underpinning", "slab settlement",
+      "mudjacking", "wall anchors", "bowing walls", "carbon fiber reinforcement",
+      "frost heave", "structural settlement", "waterproofing membrane",
+      "soil stabilization", "pier and beam", "foundation drainage", "crack injection"
+    ],
+    "description_variants": [
+      "Top {n} foundation repair contractors in {city}, {state}. Avg cost ${min}–${max}. Licensed & insured. Free inspection quotes.",
+      "Foundation cracks in {city}? Compare {n} licensed contractors, real ratings. Avg repair ${min}–${max}. Free quotes, no obligation.",
+      "{city}, {state} foundation repair: {n} vetted contractors in {county}. Real reviews, compare costs ${min}–${max}. Free estimates."
     ]
   },
   {
@@ -34,7 +52,25 @@
       "excavation contractors",
       "excavating contractor",
       "site excavation",
-      "land excavation"
+      "land excavation",
+      "excavation contractors near me",
+      "excavating contractors near me",
+      "grading and excavating near me",
+      "grading and excavating contractor",
+      "residential excavation contractors near me",
+      "driveway excavation near me",
+      "small excavation contractors near me"
+    ],
+    "keywords_lsi": [
+      "site grading", "topsoil removal", "utility trenching", "rough grading",
+      "backfill and compaction", "bobcat service", "septic installation",
+      "foundation excavation", "drainage correction", "land clearing",
+      "soil compaction", "site preparation", "percolation test", "rock removal"
+    ],
+    "description_variants": [
+      "Top {n} excavation contractors in {city}, {state}. Site prep, grading, trenching. Avg cost ${min}–${max}. Free project quotes.",
+      "{n} licensed excavation contractors in {city}, {county}. Real ratings, compare costs ${min}–${max}. Free estimates, no obligation.",
+      "{city}, {state} excavation: {n} vetted local contractors for site prep, drainage, utilities. Costs ${min}–${max}. Get free quotes."
     ]
   },
   {
@@ -53,7 +89,25 @@
       "basement waterproofing",
       "waterproofing contractor",
       "wet basement",
-      "basement leak repair"
+      "basement leak repair",
+      "basement waterproofing near me",
+      "exterior basement waterproofing",
+      "waterproofing basement walls from inside",
+      "interior basement waterproofing systems",
+      "commercial waterproofing companies near me",
+      "exterior waterproofing companies near me",
+      "best basement waterproofing near me"
+    ],
+    "keywords_lsi": [
+      "hydrostatic pressure", "sump pump", "interior drain tile", "vapor barrier",
+      "crawl space", "efflorescence", "wall crack injection", "carbon fiber straps",
+      "weeping tile", "moisture barrier", "drainage mat", "mold prevention",
+      "basement humidity", "waterproof membrane", "egress window"
+    ],
+    "description_variants": [
+      "Top {n} basement waterproofing contractors in {city}, {state}. Avg cost ${min}–${max}. Licensed & insured. Free quotes, no obligation.",
+      "Wet basement in {city}? Compare {n} licensed waterproofing contractors in {county}. 5-star rated, free estimates. Avg cost ${min}–${max}.",
+      "{city}, {state}: top {n} vetted waterproofing companies, avg cost ${min}–${max}. Real reviews, licensed & insured. Get free quotes."
     ]
   },
   {
@@ -72,7 +126,23 @@
       "snow removal",
       "snow plowing",
       "snow removal service",
-      "commercial snow removal"
+      "commercial snow removal",
+      "snow removal service near me",
+      "residential snow removal service near me",
+      "driveway snow plowing near me",
+      "snow removal service cost",
+      "residential snow plowing near me"
+    ],
+    "keywords_lsi": [
+      "seasonal contract", "per-visit pricing", "commercial plowing",
+      "calcium chloride", "ice melt", "sand and salt", "parking lot clearing",
+      "sidewalk de-icing", "storm response", "loader service",
+      "HOA snow removal", "monthly retainer", "route service", "drift clearing"
+    ],
+    "description_variants": [
+      "Top {n} snow removal contractors in {city}, {state}. Season contracts ${min}–${max}. Licensed & insured. Lock in rates now.",
+      "{n} snow plowing companies in {city}, {county}. Per-visit and seasonal options. Real ratings. Avg cost ${min}–${max}/season.",
+      "{city}, {state} snow removal: {n} vetted contractors, seasonal & per-visit pricing. Compare rates ${min}–${max}. Free quotes."
     ]
   }
 ]

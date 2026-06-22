@@ -35,8 +35,8 @@ export function generateCityIntro(city: CityEntry, service: ServiceEntry): strin
     `With a population near ${pop}, the ${tier} of ${city.name} sits in ${city.county} in ${city.state}, a region shaped by ${climate} that take a toll on local properties.`,
   ])
 
-  // Second sentence — service-relevant, variant by service slug + state.
-  const detail = pick(service.slug + city.state_abbr, [
+  // Second sentence — service-relevant, variant by city + service (unique per city, not per state).
+  const detail = pick(city.slug + '-d-' + service.slug, [
     `Local conditions here mean ${svc} work often calls for contractors who understand the soil, drainage, and building stock specific to ${city.county}.`,
     `Homeowners in ${city.name} tend to hire ${svc} specialists familiar with how ${city.state}'s seasons affect foundations and grading.`,
     `Choosing a ${svc} contractor who works regularly in the ${city.name} area helps because local crews price and plan around ${city.county}'s ground conditions.`,
