@@ -22,3 +22,38 @@
 
 # Blog trailing-slash → no-slash
 /blog/:slug/   /blog/:slug   301
+
+# 404 city pages → state landing pages (no company data, page not generated)
+/basement-waterproofing/lewiston-me        /basement-waterproofing/maine             301
+/basement-waterproofing/bangor-me          /basement-waterproofing/maine             301
+/basement-waterproofing/biddeford-me       /basement-waterproofing/maine             301
+/basement-waterproofing/bar-harbor-me      /basement-waterproofing/maine             301
+/basement-waterproofing/brewer-me          /basement-waterproofing/maine             301
+/basement-waterproofing/brunswick-me       /basement-waterproofing/maine             301
+
+/foundation-repair/south-portland-me       /foundation-repair/maine                  301
+/foundation-repair/sanford-me              /foundation-repair/maine                  301
+/foundation-repair/lewiston-me             /foundation-repair/maine                  301
+/foundation-repair/laconia-nh              /foundation-repair/new-hampshire          301
+/foundation-repair/concord-nh              /foundation-repair/new-hampshire          301
+
+/excavation-contractors/windham-me         /excavation-contractors/maine             301
+/excavation-contractors/sanford-me         /excavation-contractors/maine             301
+/excavation-contractors/bangor-me          /excavation-contractors/maine             301
+/excavation-contractors/portland-me        /excavation-contractors/maine             301
+/excavation-contractors/portsmouth-nh      /excavation-contractors/new-hampshire     301
+/excavation-contractors/concord-nh         /excavation-contractors/new-hampshire     301
+/excavation-contractors/hanover-nh         /excavation-contractors/new-hampshire     301
+
+/snow-removal/sanford-me                   /snow-removal/maine                       301
+/snow-removal/augusta-me                   /snow-removal/maine                       301
+/snow-removal/windham-nh                   /snow-removal/new-hampshire               301
+/snow-removal/hudson-nh                    /snow-removal/new-hampshire               301
+/snow-removal/keene-nh                     /snow-removal/new-hampshire               301
+/snow-removal/laconia-nh                   /snow-removal/new-hampshire               301
+/snow-removal/exeter-nh                    /snow-removal/new-hampshire               301
+/snow-removal/dover-nh                     /snow-removal/new-hampshire               301
+/snow-removal/merrimack-nh                 /snow-removal/new-hampshire               301
+/snow-removal/durham-nh                    /snow-removal/new-hampshire               301
+/snow-removal/manchester-nh                /snow-removal/new-hampshire               301
+/snow-removal/portsmouth-nh                /snow-removal/new-hampshire               301

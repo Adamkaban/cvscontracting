@@ -23,6 +23,8 @@ export interface ServiceEntry {
   affiliate_url: string
   priority: 1 | 2
   keywords: string[]
+  keywords_lsi?: string[]
+  description_variants?: string[]
   pageTitle?: string
   metaDescription?: string
 }

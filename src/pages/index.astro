@@ -29,7 +29,11 @@ for (const s of services) {
   counts[s.slug] = list.length
   if (s.slug === 'basement-waterproofing') {
     bwCompanies = list
-    preview = [...list].sort((a, b) => b.rating - a.rating || b.review_count - a.review_count).slice(0, 3)
+    const validBwSlugs = new Set(getValidCitiesForService(cities, list, phase).map(c => c.slug))
+    preview = [...list]
+      .filter(co => validBwSlugs.has(co.city_slug))
+      .sort((a, b) => b.rating - a.rating || b.review_count - a.review_count)
+      .slice(0, 3)
   }
   for (const company of list) {
     if (meCitySlugs.has(company.city_slug)) stateCounts.ME++
