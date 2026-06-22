@@ -10,6 +10,7 @@ import config from '../../site.config.ts'
 import servicesData from '../data/services.json'
 import citiesData from '../data/cities.json'
 import type { ServiceEntry, CityEntry, CompanyEntry } from '../types'
+import { getValidCitiesForService } from '../utils/validCities'
 
 const phase = parseInt(import.meta.env.PUBLIC_PHASE ?? '1')
 const services = (servicesData as ServiceEntry[]).filter((s) => s.priority <= phase)
@@ -21,12 +22,15 @@ const nhCitySlugs = new Set(cities.filter((c) => c.state_abbr === 'NH').map((c) 
 const stateCounts: Record<string, number> = { ME: 0, NH: 0 }
 const counts: Record<string, number> = {}
 let preview: CompanyEntry[] = []
+let bwCompanies: CompanyEntry[] = []
 for (const s of services) {
   const mod = await import(`../data/companies/${s.slug}.json`).catch(() => ({ default: [] }))
   const list = mod.default as CompanyEntry[]
   counts[s.slug] = list.length
-  if (s.slug === 'basement-waterproofing')
+  if (s.slug === 'basement-waterproofing') {
+    bwCompanies = list
     preview = [...list].sort((a, b) => b.rating - a.rating || b.review_count - a.review_count).slice(0, 3)
+  }
   for (const company of list) {
     if (meCitySlugs.has(company.city_slug)) stateCounts.ME++
     else if (nhCitySlugs.has(company.city_slug)) stateCounts.NH++
@@ -36,7 +40,7 @@ const totalCompanies = Object.values(counts).reduce((a, b) => a + b, 0)
 const featured = services.find((s) => s.slug === 'basement-waterproofing') ?? services[0]
 const rest = services.filter((s) => s.slug !== featured?.slug)
 const usd = (n: number) => '$' + n.toLocaleString('en-US')
-const topCities = cities.slice(0, 12)
+const topCities = getValidCitiesForService(cities, bwCompanies, phase).slice(0, 12)
 const today = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
 const maineCityCount = cities.filter((c) => c.state_abbr === 'ME').length
 const nhCityCount = cities.filter((c) => c.state_abbr === 'NH').length

@@ -16,6 +16,7 @@ import ServiceSchema from '../../components/schema/ServiceSchema.astro'
 import FAQSchema from '../../components/schema/FAQSchema.astro'
 
 import { getHubFAQs } from '../../lib/faqs'
+import { getValidCitiesForService } from '../../utils/validCities'
 
 export async function getStaticPaths() {
   const cities = citiesData as CityEntry[]
@@ -31,12 +32,7 @@ export async function getStaticPaths() {
       .then((m) => m.default as CompanyEntry[])
       .catch(() => [] as CompanyEntry[])
 
-    const validCities = cities
-      .filter((c) => c.phase <= phase)
-      .filter(
-        (c) =>
-          companies.filter((co) => co.city_slug === c.slug && co.rating >= 3.5).length >= 3,
-      )
+    const validCities = getValidCitiesForService(cities, companies, phase)
 
     out.push({
       params: { service: service.slug },

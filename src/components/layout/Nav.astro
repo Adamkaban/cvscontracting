@@ -3,6 +3,7 @@ import config from '../../../site.config.ts'
 import servicesData from '../../data/services.json'
 import citiesData from '../../data/cities.json'
 import type { ServiceEntry, CityEntry, CompanyEntry } from '../../types'
+import { getValidCitiesForService } from '../../utils/validCities'
 import CTAButton from '../common/CTAButton.astro'
 
 const phase = parseInt(import.meta.env.PUBLIC_PHASE ?? '1')
@@ -14,16 +15,8 @@ const bwCompanies = await import('../../data/companies/basement-waterproofing.js
   .then((m) => m.default as CompanyEntry[])
   .catch(() => [] as CompanyEntry[])
 
-const bwCityCounts = new Map<string, number>()
-for (const co of bwCompanies) {
-  if (co.rating >= 3.5) {
-    bwCityCounts.set(co.city_slug, (bwCityCounts.get(co.city_slug) ?? 0) + 1)
-  }
-}
 const validBWCitySlugs = new Set(
-  allCities
-    .filter((c) => c.phase <= phase && (bwCityCounts.get(c.slug) ?? 0) >= 3)
-    .map((c) => c.slug),
+  getValidCitiesForService(allCities, bwCompanies, phase).map((c) => c.slug),
 )
 
 const maineCities = allCities

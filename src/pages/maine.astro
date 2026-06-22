@@ -6,6 +6,7 @@ import Eyebrow from '../components/common/Eyebrow.astro'
 import citiesData from '../data/cities.json'
 import servicesData from '../data/services.json'
 import type { CityEntry, ServiceEntry, CompanyEntry } from '../types'
+import { getValidCitiesForService } from '../utils/validCities'
 
 const phase = parseInt(import.meta.env.PUBLIC_PHASE ?? '1')
 const services = (servicesData as ServiceEntry[]).filter((s) => s.priority <= phase)
@@ -19,14 +20,9 @@ for (const service of services) {
   const companies: CompanyEntry[] = await import(`../data/companies/${service.slug}.json`)
     .then((m) => m.default as CompanyEntry[])
     .catch(() => [])
-  for (const city of cities) {
-    const count = companies.filter(
-      (co) => co.city_slug === city.slug && co.rating >= 3.5,
-    ).length
-    if (count >= 3) {
-      if (!cityServiceMap[city.slug]) cityServiceMap[city.slug] = []
-      cityServiceMap[city.slug].push({ slug: service.slug, name: service.name })
-    }
+  for (const city of getValidCitiesForService(cities, companies, phase)) {
+    if (!cityServiceMap[city.slug]) cityServiceMap[city.slug] = []
+    cityServiceMap[city.slug].push({ slug: service.slug, name: service.name })
   }
 }
 
